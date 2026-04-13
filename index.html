@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrowthLab — Digital Marketing Agency</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --card: #15151e;
+    --accent: #c8ff00;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --text: #f0f0f0;
+    --muted: #888899;
+    --border: rgba(255,255,255,0.07);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--font-head);
+    font-size: 1.4rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text);
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 400;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--text); }
+  .nav-cta {
+    background: var(--accent);
+    color: #0a0a0f;
+    border: none;
+    padding: 0.6rem 1.4rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-cta:hover { transform: scale(1.03); opacity: 0.9; }
+
+  /* ---- HERO ---- */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 8rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -200px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 700px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; right: -100px;
+    width: 400px; height: 400px;
+    background: radial-gradient(ellipse, rgba(200,255,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,255,0,0.1);
+    border: 1px solid rgba(200,255,0,0.25);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem;
+    color: var(--accent);
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    animation: fadeUp 0.6s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.8rem, 7vw, 6rem);
+    font-weight: 800;
+    line-height: 1.0;
+    letter-spacing: -0.04em;
+    max-width: 900px;
+    animation: fadeUp 0.6s 0.1s ease both;
+  }
+  .hero h1 em { font-style: normal; color: var(--accent); }
+  .hero h1 .stroke {
+    -webkit-text-stroke: 1.5px rgba(255,255,255,0.4);
+    color: transparent;
+  }
+  .hero-sub {
+    margin-top: 1.5rem;
+    color: var(--muted);
+    font-size: 1.1rem;
+    max-width: 520px;
+    font-weight: 300;
+    animation: fadeUp 0.6s 0.2s ease both;
+  }
+  .hero-btns {
+    display: flex; gap: 1rem; margin-top: 2.5rem; flex-wrap: wrap; justify-content: center;
+    animation: fadeUp 0.6s 0.3s ease both;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #0a0a0f;
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: transform 0.2s;
+  }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--text);
+    padding: 0.85rem 2rem;
+    border-radius: 100px;
+    border: 1px solid var(--border);
+    font-weight: 400;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.25); background: rgba(255,255,255,0.03); }
+
+  .hero-stats {
+    display: flex; gap: 3rem; margin-top: 4rem;
+    border-top: 1px solid var(--border);
+    padding-top: 2.5rem;
+    animation: fadeUp 0.6s 0.4s ease both;
+    flex-wrap: wrap; justify-content: center;
+  }
+  .stat-item { text-align: center; }
+  .stat-num {
+    font-family: var(--font-head);
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text);
+  }
+  .stat-num span { color: var(--accent); }
+  .stat-label { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ---- MARQUEE ---- */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 1rem 0;
+    background: var(--bg2);
+  }
+  .marquee-track {
+    display: flex; gap: 3rem;
+    animation: marquee 22s linear infinite;
+    width: max-content;
+  }
+  .marquee-item {
+    font-family: var(--font-head);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    display: flex; align-items: center; gap: 1rem;
+  }
+  .marquee-item::after { content: '✦'; color: var(--accent); }
+
+  /* ---- SERVICES ---- */
+  section { padding: 6rem 5%; }
+  .section-label {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    max-width: 600px;
+  }
+  .section-title em { font-style: normal; color: var(--accent); }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5px;
+    margin-top: 4rem;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+  }
+  .service-card {
+    background: var(--card);
+    padding: 2.5rem;
+    transition: background 0.3s;
+    cursor: default;
+    position: relative;
+    overflow: hidden;
+  }
+  .service-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(200,255,0,0.04) 0%, transparent 60%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .service-card:hover { background: var(--bg3); }
+  .service-card:hover::before { opacity: 1; }
+
+  .service-icon {
+    width: 48px; height: 48px;
+    border-radius: 12px;
+    background: rgba(200,255,0,0.1);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .service-icon.orange { background: rgba(255,107,53,0.12); }
+  .service-icon.purple { background: rgba(124,58,237,0.12); }
+  .service-icon.blue { background: rgba(56,189,248,0.1); }
+
+  .service-card h3 {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 0.8rem;
+    letter-spacing: -0.02em;
+  }
+  .service-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.7; font-weight: 300; }
+  .service-tag {
+    display: inline-block;
+    margin-top: 1.2rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.25rem 0.8rem;
+    font-size: 0.75rem;
+    color: var(--muted);
+  }
+
+  /* ---- HOW IT WORKS ---- */
+  .how-section { background: var(--bg2); }
+  .steps-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+    position: relative;
+  }
+  .step-card {
+    position: relative;
+    padding: 2rem;
+    background: var(--card);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+  }
+  .step-num {
+    font-family: var(--font-head);
+    font-size: 3rem;
+    font-weight: 800;
+    color: rgba(200,255,0,0.15);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  .step-card h4 {
+    font-family: var(--font-head);
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+  .step-card p { color: var(--muted); font-size: 0.88rem; font-weight: 300; }
+
+  /* ---- RESULTS ---- */
+  .results-wrap {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+  .result-big {
+    font-family: var(--font-head);
+    font-size: clamp(3rem, 7vw, 5.5rem);
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+    color: var(--accent);
+  }
+  .result-label { color: var(--muted); font-weight: 300; margin-top: 0.5rem; }
+  .result-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .result-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    display: flex; align-items: center; gap: 1.5rem;
+  }
+  .result-card-num {
+    font-family: var(--font-head);
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: var(--accent);
+    white-space: nowrap;
+  }
+  .result-card-text h5 { font-size: 0.95rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .result-card-text p { font-size: 0.82rem; color: var(--muted); font-weight: 300; }
+
+  /* ---- PACKAGES ---- */
+  .packages-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 4rem;
+  }
+  .package-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 2.5rem;
+    position: relative;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+  .package-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.12); }
+  .package-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(135deg, rgba(200,255,0,0.04), var(--card));
+  }
+  .featured-badge {
+    position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+    background: var(--accent);
+    color: #0a0a0f;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.3rem 1rem;
+    border-radius: 100px;
+    white-space: nowrap;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pkg-name {
+    font-family: var(--font-head);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.5rem;
+  }
+  .pkg-price {
+    font-family: var(--font-head);
+    font-size: 2.8rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+  .pkg-price sup { font-size: 1rem; vertical-align: super; font-weight: 600; }
+  .pkg-period { font-size: 0.85rem; color: var(--muted); font-weight: 300; margin-top: 0.25rem; }
+  .pkg-divider { border: none; border-top: 1px solid var(--border); margin: 1.5rem 0; }
+  .pkg-features { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .pkg-features li {
+    font-size: 0.88rem;
+    color: var(--muted);
+    display: flex; align-items: flex-start; gap: 0.6rem;
+    font-weight: 300;
+  }
+  .pkg-features li::before { content: '✓'; color: var(--accent); font-weight: 600; flex-shrink: 0; }
+  .pkg-features li.off { opacity: 0.4; }
+  .pkg-features li.off::before { content: '–'; color: var(--muted); }
+  .pkg-btn {
+    display: block; text-align: center;
+    margin-top: 2rem;
+    padding: 0.85rem;
+    border-radius: 100px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.2s, opacity 0.2s;
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .pkg-btn:hover { opacity: 0.8; }
+  .pkg-btn.featured-btn { background: var(--accent); color: #0a0a0f; border: none; }
+
+  /* ---- TESTIMONIALS ---- */
+  .testimonials-section { background: var(--bg2); }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    margin-top: 3.5rem;
+  }
+  .testi-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: border-color 0.3s;
+  }
+  .testi-card:hover { border-color: rgba(200,255,0,0.2); }
+  .stars { color: var(--accent); font-size: 0.8rem; margin-bottom: 1rem; letter-spacing: 2px; }
+  .testi-text {
+    font-size: 0.92rem;
+    color: var(--text);
+    line-height: 1.8;
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+  }
+  .testi-author { display: flex; align-items: center; gap: 0.8rem; }
+  .testi-avatar {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--accent3), var(--accent2));
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 0.8rem; color: #fff;
+    flex-shrink: 0;
+  }
+  .testi-name { font-size: 0.88rem; font-weight: 500; }
+  .testi-role { font-size: 0.78rem; color: var(--muted); }
+
+  /* ---- CONTACT ---- */
+  .contact-section {
+    background: var(--bg);
+    position: relative;
+    overflow: hidden;
+  }
+  .contact-section::before {
+    content: '';
+    position: absolute;
+    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .contact-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+    position: relative;
+    z-index: 1;
+  }
+  .contact-info h2 {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .contact-info h2 em { font-style: normal; color: var(--accent); }
+  .contact-info p { color: var(--muted); font-weight: 300; line-height: 1.8; margin-bottom: 2rem; }
+  .contact-chips { display: flex; flex-wrap: wrap; gap: 0.6rem; }
+  .chip {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.4rem 1rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+  .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+  .form-group label { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s;
+    -webkit-appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: rgba(200,255,0,0.4); }
+  .form-group select option { background: #1a1a24; }
+  .form-group textarea { resize: vertical; min-height: 110px; }
+  .submit-btn {
+    background: var(--accent);
+    color: #0a0a0f;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 100px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s;
+    margin-top: 0.5rem;
+  }
+  .submit-btn:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+  .footer-logo {
+    font-family: var(--font-head);
+    font-size: 1.2rem;
+    font-weight: 800;
+  }
+  .footer-logo span { color: var(--accent); }
+  footer p { color: var(--muted); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .results-wrap, .contact-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .form-row { grid-template-columns: 1fr; }
+    .hero h1 { font-size: clamp(2.2rem, 9vw, 4rem); }
+    .hero-stats { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="logo">Growth<span>Lab</span></div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#results">Results</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#testimonials">Clients</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">Performance Marketing Agency</div>
+  <h1>
+    We Scale Brands<br>
+    <em>Without Guesswork</em><br>
+    <span class="stroke">Just Results.</span>
+  </h1>
+  <p class="hero-sub">From Google Ads to Shopify stores — we handle your entire digital growth engine so you can focus on running your business.</p>
+  <div class="hero-btns">
+    <a href="#contact" class="btn-primary">Start Your Campaign</a>
+    <a href="#services" class="btn-secondary">See What We Do</a>
+  </div>
+  <div class="hero-stats">
+    <div class="stat-item">
+      <div class="stat-num">3.8<span>×</span></div>
+      <div class="stat-label">Average ROAS Delivered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">200<span>+</span></div>
+      <div class="stat-label">Brands Scaled</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">₹84<span>Cr</span></div>
+      <div class="stat-label">Ad Spend Managed</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">97<span>%</span></div>
+      <div class="stat-label">Client Retention Rate</div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item">Meta Ads</span>
+    <span class="marquee-item">Shopify</span>
+    <span class="marquee-item">WooCommerce</span>
+    <span class="marquee-item">Landing Pages</span>
+    <span class="marquee-item">Brand Strategy</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Conversion Optimization</span>
+    <span class="marquee-item">Google Ads</span>
+    <span class="marquee-item">Meta Ads</span>
+    <span class="marquee-item">Shopify</span>
+    <span class="marquee-item">WooCommerce</span>
+    <span class="marquee-item">Landing Pages</span>
+    <span class="marquee-item">Brand Strategy</span>
+    <span class="marquee-item">Performance Marketing</span>
+    <span class="marquee-item">Conversion Optimization</span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-label">What We Do</div>
+  <h2 class="section-title">Every channel. <em>One team.</em> Zero fluff.</h2>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="service-icon">📢</div>
+      <h3>Brand Promotion</h3>
+      <p>We craft and execute full-stack brand awareness campaigns — from narrative building to multi-channel amplification that puts your brand in front of the right audience.</p>
+      <span class="service-tag">Strategy · Creative · Distribution</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon orange">🎯</div>
+      <h3>Google Ads Management</h3>
+      <p>Search, Shopping, Display, YouTube — we run data-driven campaigns with obsessive bid management, A/B testing, and weekly optimization cycles to maximize your ROI.</p>
+      <span class="service-tag">Search · Shopping · YouTube · Display</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon purple">🚀</div>
+      <h3>Landing Page Design</h3>
+      <p>High-converting landing pages built specifically for ad campaigns. We design, write, and test pages that turn paid traffic into leads and buyers — fast.</p>
+      <span class="service-tag">Design · Copy · A/B Testing</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon blue">📱</div>
+      <h3>Meta Ads Management</h3>
+      <p>Facebook and Instagram ad campaigns that reach cold audiences, retarget warm prospects, and scale profitably. Creative strategy, audience layering, and pixel optimization included.</p>
+      <span class="service-tag">Facebook · Instagram · Reels · Stories</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon">🛍️</div>
+      <h3>Shopify Management</h3>
+      <p>Full Shopify store setup, optimization, and ongoing management. Product pages, collections, checkout flows, apps, and speed — handled so your store converts at its peak.</p>
+      <span class="service-tag">Setup · CRO · Apps · Speed</span>
+    </div>
+    <div class="service-card">
+      <div class="service-icon orange">🔧</div>
+      <h3>WooCommerce Management</h3>
+      <p>Expert WooCommerce store management — from theme customization and plugin setup to performance optimization and inventory sync. Your store, always running at 100%.</p>
+      <span class="service-tag">WordPress · Plugins · Performance</span>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section" id="process">
+  <div class="section-label">Our Process</div>
+  <h2 class="section-title">Simple onboarding. <em>Fast results.</em></h2>
+  <div class="steps-container">
+    <div class="step-card">
+      <div class="step-num">01</div>
+      <h4>Discovery Call</h4>
+      <p>We learn your business, goals, and current setup. No pushy sales — just a real conversation to see if we're a fit.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">02</div>
+      <h4>Custom Strategy</h4>
+      <p>We build a tailored growth plan with channel selection, budget recommendations, and 90-day milestones.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">03</div>
+      <h4>Launch & Optimize</h4>
+      <p>Campaigns go live within 7 days. We optimize weekly and send you transparent performance reports.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-num">04</div>
+      <h4>Scale Profitably</h4>
+      <p>Once we find what works, we scale spend methodically — increasing your revenue while protecting your margins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- RESULTS -->
+<section id="results">
+  <div class="section-label">Track Record</div>
+  <h2 class="section-title">Numbers that actually <em>matter</em></h2>
+  <div class="results-wrap">
+    <div>
+      <div class="result-big">₹40Cr+</div>
+      <div class="result-label">Revenue generated for clients in FY2024</div>
+      <p style="color:var(--muted);font-weight:300;font-size:0.9rem;margin-top:1.5rem;line-height:1.8;">We don't measure success by impressions or clicks. We measure it by rupees in your bank account. Every campaign we run is tied to a revenue or ROAS target.</p>
+    </div>
+    <div class="result-cards">
+      <div class="result-card">
+        <div class="result-card-num">4.2×</div>
+        <div class="result-card-text">
+          <h5>Average Google Ads ROAS</h5>
+          <p>Across e-commerce and lead gen clients</p>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-num">-38%</div>
+        <div class="result-card-text">
+          <h5>Average CPA Reduction</h5>
+          <p>Within the first 60 days of management</p>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-num">2.1×</div>
+        <div class="result-card-text">
+          <h5>Shopify Conversion Lift</h5>
+          <p>Post store optimization and CRO</p>
+        </div>
+      </div>
+      <div class="result-card">
+        <div class="result-card-num">18 days</div>
+        <div class="result-card-text">
+          <h5>Average Time to First Lead</h5>
+          <p>From onboarding to first conversion</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricing" style="background: var(--bg2);">
+  <div class="section-label">Packages</div>
+  <h2 class="section-title">Transparent pricing. <em>No surprises.</em></h2>
+  <div class="packages-grid">
+    <div class="package-card">
+      <div class="pkg-name">Starter</div>
+      <div class="pkg-price"><sup>₹</sup>24,999</div>
+      <div class="pkg-period">per month</div>
+      <hr class="pkg-divider">
+      <ul class="pkg-features">
+        <li>1 Ad Platform (Google or Meta)</li>
+        <li>Up to ₹1L monthly ad spend</li>
+        <li>Campaign setup & management</li>
+        <li>Bi-weekly performance report</li>
+        <li>1 landing page design</li>
+        <li class="off">Shopify / WooCommerce</li>
+        <li class="off">Dedicated account manager</li>
+      </ul>
+      <a href="#contact" class="pkg-btn">Get Started</a>
+    </div>
+    <div class="package-card featured">
+      <div class="featured-badge">Most Popular</div>
+      <div class="pkg-name">Growth</div>
+      <div class="pkg-price"><sup>₹</sup>59,999</div>
+      <div class="pkg-period">per month</div>
+      <hr class="pkg-divider">
+      <ul class="pkg-features">
+        <li>Google + Meta Ads</li>
+        <li>Up to ₹5L monthly ad spend</li>
+        <li>Full campaign management</li>
+        <li>Weekly performance report</li>
+        <li>3 landing pages per month</li>
+        <li>Shopify or WooCommerce support</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a href="#contact" class="pkg-btn featured-btn">Get Started</a>
+    </div>
+    <div class="package-card">
+      <div class="pkg-name">Scale</div>
+      <div class="pkg-price">Custom</div>
+      <div class="pkg-period">enterprise pricing</div>
+      <hr class="pkg-divider">
+      <ul class="pkg-features">
+        <li>All platforms & channels</li>
+        <li>Unlimited ad spend</li>
+        <li>Full brand promotion strategy</li>
+        <li>Daily reporting dashboard</li>
+        <li>Unlimited landing pages</li>
+        <li>Full e-commerce management</li>
+        <li>Dedicated team of 3+</li>
+      </ul>
+      <a href="#contact" class="pkg-btn">Talk to Sales</a>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonials-section">
+  <div class="section-label">Client Love</div>
+  <h2 class="section-title">Real words from <em>real clients</em></h2>
+  <div class="testimonials-grid">
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"GrowthLab scaled our Google Shopping campaigns from ₹50K to ₹3L monthly spend while improving ROAS from 2.1× to 4.8×. Best marketing investment we've made."</p>
+      <div class="testi-author">
+        <div class="testi-avatar">RS</div>
+        <div>
+          <div class="testi-name">Rahul Sharma</div>
+          <div class="testi-role">Founder, StyleKart — Fashion D2C</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Our Shopify store was converting at 0.8%. After their CRO and redesign, we hit 3.2% in 6 weeks. The team is sharp, communicative, and genuinely invested."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: linear-gradient(135deg, #ff6b35, #ffaa00);">PK</div>
+        <div>
+          <div class="testi-name">Priya Kaur</div>
+          <div class="testi-role">Co-founder, OrganiQ — Health & Wellness</div>
+        </div>
+      </div>
+    </div>
+    <div class="testi-card">
+      <div class="stars">★★★★★</div>
+      <p class="testi-text">"Their Meta Ads team built a funnel that brought our cost per lead down by 45% in the first month. The landing pages they designed are honestly beautiful too."</p>
+      <div class="testi-author">
+        <div class="testi-avatar" style="background: linear-gradient(135deg, #0ea5e9, #7c3aed);">AV</div>
+        <div>
+          <div class="testi-name">Arjun Verma</div>
+          <div class="testi-role">CEO, EdPath — EdTech Platform</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" class="contact-section">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <div class="section-label">Let's Talk</div>
+      <h2>Ready to <em>grow?</em><br>Let's build your engine.</h2>
+      <p>Tell us about your business and we'll put together a custom strategy within 48 hours. No lock-in contracts, no fluff — just growth.</p>
+      <div class="contact-chips">
+        <span class="chip">📍 Based in India</span>
+        <span class="chip">🌍 Serving globally</span>
+        <span class="chip">⚡ 48hr response</span>
+        <span class="chip">📞 Free strategy call</span>
+      </div>
+      <div style="margin-top: 2rem; padding: 1.5rem; background: var(--card); border: 1px solid var(--border); border-radius: 14px;">
+        <div style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.8rem;">Direct Contact</div>
+        <div style="font-size: 0.9rem; color: var(--text); margin-bottom: 0.4rem;">📧 hello@growthlab.in</div>
+        <div style="font-size: 0.9rem; color: var(--text);">📱 +91 98765 43210</div>
+      </div>
+    </div>
+    <div>
+      <div style="background: var(--card); border: 1px solid var(--border); border-radius: 20px; padding: 2.5rem;">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>First Name</label>
+              <input type="text" placeholder="Rahul">
+            </div>
+            <div class="form-group">
+              <label>Last Name</label>
+              <input type="text" placeholder="Sharma">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Email Address</label>
+            <input type="email" placeholder="rahul@yourbrand.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number</label>
+            <input type="tel" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group">
+            <label>Service Interested In</label>
+            <select>
+              <option value="" disabled selected>Select a service</option>
+              <option>Brand Promotion</option>
+              <option>Google Ads Management</option>
+              <option>Meta Ads Management</option>
+              <option>Landing Page Design</option>
+              <option>Shopify Management</option>
+              <option>WooCommerce Management</option>
+              <option>Full Growth Package</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Monthly Ad Budget (approx.)</label>
+            <select>
+              <option value="" disabled selected>Select budget range</option>
+              <option>Under ₹50,000</option>
+              <option>₹50,000 – ₹2,00,000</option>
+              <option>₹2,00,000 – ₹5,00,000</option>
+              <option>₹5,00,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Tell us about your brand</label>
+            <textarea placeholder="What do you sell, who's your audience, and what's your main challenge right now?"></textarea>
+          </div>
+          <button class="submit-btn" onclick="handleSubmit(this)">Send Request →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Growth<span>Lab</span></div>
+    <p style="margin-top: 0.4rem;">Performance Marketing for ambitious brands.</p>
+  </div>
+  <div class="footer-links">
+    <a href="#services">Services</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#testimonials">Clients</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <p>© 2025 GrowthLab. All rights reserved.</p>
+</footer>
+
+<script>
+function handleSubmit(btn) {
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    btn.textContent = '✓ Request Sent!';
+    btn.style.background = '#22c55e';
+  }, 1200);
+}
+
+// Smooth scroll offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      e.preventDefault();
+      const offset = 80;
+      window.scrollTo({ top: target.offsetTop - offset, behavior: 'smooth' });
+    }
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.service-card, .step-card, .result-card, .package-card, .testi-card').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(20px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
