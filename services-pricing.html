@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" type="image/png" href="/logo.ico.png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services & Pricing — GrowthLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --card: #15151e;
+    --accent: #c8ff00;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --text: #f0f0f0;
+    --muted: #888899;
+    --border: rgba(255,255,255,0.07);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.6; overflow-x: hidden; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,15,0.85); backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-cta { background: var(--accent); color: #0a0a0f; border: none; padding: 0.6rem 1.4rem; border-radius: 100px; font-family: var(--font-body); font-size: 0.88rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: transform 0.2s; }
+  .nav-cta:hover { transform: scale(1.03); }
+
+  /* HERO */
+  .page-hero {
+    padding: 10rem 5% 5rem; text-align: center; position: relative; overflow: hidden;
+  }
+  .page-hero::before {
+    content: ''; position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 800px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,255,0,0.07) 0%, transparent 65%);
+    pointer-events: none;
+  }
+  .page-hero::after {
+    content: ''; position: absolute; bottom: 0; left: 0;
+    width: 350px; height: 350px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.25);
+    border-radius: 100px; padding: 0.35rem 1rem;
+    font-size: 0.8rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .page-hero h1 {
+    font-family: var(--font-head); font-size: clamp(2.6rem, 6vw, 5.2rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.04em;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  .page-hero h1 em { font-style: normal; color: var(--accent); }
+  .page-hero h1 .stroke { -webkit-text-stroke: 1.5px rgba(255,255,255,0.3); color: transparent; }
+  .page-hero p { margin-top: 1.2rem; color: var(--muted); font-size: 1.05rem; max-width: 500px; margin-left: auto; margin-right: auto; font-weight: 300; animation: fadeUp 0.5s 0.2s ease both; }
+
+  /* SERVICE NAV TABS */
+  .service-tabs {
+    display: flex; justify-content: center; gap: 0.5rem;
+    padding: 2.5rem 5% 0; flex-wrap: wrap;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .stab {
+    background: transparent; border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.55rem 1.3rem;
+    color: var(--muted); font-family: var(--font-body); font-size: 0.84rem;
+    cursor: pointer; transition: all 0.2s; text-decoration: none;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+  }
+  .stab:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .stab.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 600; }
+
+  /* SECTION COMMONS */
+  .section-label { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.15em; color: var(--accent); font-weight: 600; margin-bottom: 0.8rem; }
+  .section-title { font-family: var(--font-head); font-size: clamp(2rem, 4vw, 3rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; }
+  .section-title em { font-style: normal; color: var(--accent); }
+  .section-sub { color: var(--muted); font-weight: 300; font-size: 0.95rem; margin-top: 0.8rem; max-width: 560px; line-height: 1.8; }
+
+  /* SERVICE DETAIL BLOCKS */
+  .service-block {
+    padding: 6rem 5%;
+    border-bottom: 1px solid var(--border);
+    scroll-margin-top: 90px;
+  }
+  .service-block:nth-child(even) { background: var(--bg2); }
+
+  .sb-inner {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .sb-inner.flip { direction: rtl; }
+  .sb-inner.flip > * { direction: ltr; }
+
+  .sb-visual {
+    border-radius: 24px; overflow: hidden;
+    border: 1px solid var(--border);
+    background: var(--card);
+    position: relative;
+  }
+  .sb-visual-inner {
+    padding: 2.5rem;
+    min-height: 380px;
+    display: flex; flex-direction: column; justify-content: space-between;
+    position: relative; overflow: hidden;
+  }
+  .sb-visual-inner::before {
+    content: '';
+    position: absolute; top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .glow-green::before { background: radial-gradient(circle, rgba(200,255,0,0.12) 0%, transparent 70%); }
+  .glow-orange::before { background: radial-gradient(circle, rgba(255,107,53,0.12) 0%, transparent 70%); }
+  .glow-purple::before { background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%); }
+  .glow-blue::before { background: radial-gradient(circle, rgba(56,189,248,0.1) 0%, transparent 70%); }
+  .glow-teal::before { background: radial-gradient(circle, rgba(20,184,166,0.1) 0%, transparent 70%); }
+  .glow-pink::before { background: radial-gradient(circle, rgba(236,72,153,0.1) 0%, transparent 70%); }
+
+  .visual-icon-big { font-size: 3rem; margin-bottom: 1.5rem; }
+  .visual-stats { display: flex; gap: 2rem; flex-wrap: wrap; }
+  .vs-item { }
+  .vs-num { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; color: var(--accent); line-height: 1; }
+  .vs-label { font-size: 0.72rem; color: var(--muted); margin-top: 0.2rem; }
+
+  .visual-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+  .vtag {
+    background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.3rem 0.8rem;
+    font-size: 0.75rem; color: var(--muted);
+  }
+  .vtag.accent { background: rgba(200,255,0,0.08); border-color: rgba(200,255,0,0.2); color: var(--accent); }
+
+  .mini-chart { margin-top: 1.5rem; }
+  .chart-bar-row { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 0.6rem; }
+  .chart-label { font-size: 0.75rem; color: var(--muted); width: 60px; flex-shrink: 0; }
+  .chart-bar-wrap { flex: 1; background: rgba(255,255,255,0.05); border-radius: 4px; height: 6px; overflow: hidden; }
+  .chart-bar { height: 100%; border-radius: 4px; background: var(--accent); }
+  .chart-val { font-size: 0.72rem; color: var(--text); font-weight: 500; width: 32px; text-align: right; flex-shrink: 0; }
+
+  /* SERVICE CONTENT */
+  .sb-content { }
+  .sb-content h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 1rem; }
+  .sb-content h2 em { font-style: normal; color: var(--accent); }
+  .sb-content > p { color: var(--muted); font-weight: 300; font-size: 0.92rem; line-height: 1.9; margin-bottom: 1.5rem; }
+
+  .deliverables { display: flex; flex-direction: column; gap: 0.6rem; margin-bottom: 2rem; }
+  .del-item { display: flex; align-items: flex-start; gap: 0.8rem; padding: 0.75rem 1rem; background: var(--bg3); border-radius: 10px; border: 1px solid var(--border); transition: border-color 0.2s; }
+  .del-item:hover { border-color: rgba(200,255,0,0.15); }
+  .del-check { color: var(--accent); font-size: 0.8rem; flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+  .del-text h6 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.15rem; }
+  .del-text p { font-size: 0.78rem; color: var(--muted); font-weight: 300; margin: 0; }
+
+  .sb-cta {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent); color: #0a0a0f;
+    padding: 0.8rem 1.8rem; border-radius: 100px;
+    font-weight: 600; font-size: 0.88rem; text-decoration: none;
+    transition: transform 0.2s;
+  }
+  .sb-cta:hover { transform: translateX(3px); }
+  .sb-cta-ghost {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: transparent; color: var(--text);
+    padding: 0.8rem 1.8rem; border-radius: 100px;
+    border: 1px solid var(--border);
+    font-weight: 400; font-size: 0.88rem; text-decoration: none;
+    transition: border-color 0.2s; margin-left: 0.8rem;
+  }
+  .sb-cta-ghost:hover { border-color: rgba(255,255,255,0.2); }
+
+  /* COMPARISON TABLE */
+  .compare-section { padding: 6rem 5%; background: var(--bg2); }
+  .compare-wrap { overflow-x: auto; margin-top: 3rem; }
+  table { width: 100%; border-collapse: collapse; min-width: 700px; }
+  thead th {
+    padding: 1rem 1.5rem; text-align: left;
+    font-family: var(--font-head); font-size: 0.9rem; font-weight: 700;
+    border-bottom: 1px solid var(--border); color: var(--muted);
+  }
+  thead th:first-child { color: var(--text); }
+  thead th.featured-col {
+    background: rgba(200,255,0,0.06);
+    color: var(--accent);
+    border-radius: 12px 12px 0 0;
+    border: 1px solid rgba(200,255,0,0.15);
+    border-bottom: none;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.2s; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+  tbody td { padding: 0.9rem 1.5rem; font-size: 0.88rem; color: var(--muted); vertical-align: middle; }
+  tbody td:first-child { color: var(--text); font-weight: 500; }
+  tbody td.featured-col {
+    background: rgba(200,255,0,0.03);
+    border-left: 1px solid rgba(200,255,0,0.1);
+    border-right: 1px solid rgba(200,255,0,0.1);
+  }
+  .check { color: var(--accent); font-weight: 700; }
+  .cross { color: rgba(255,255,255,0.2); }
+  .partial { color: var(--accent2); font-size: 0.75rem; }
+
+  /* PRICING SECTION */
+  .pricing-section { padding: 6rem 5%; }
+  .pricing-toggle {
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+    margin-top: 2.5rem; margin-bottom: 3rem;
+  }
+  .toggle-label { font-size: 0.88rem; color: var(--muted); }
+  .toggle-label.active { color: var(--text); font-weight: 500; }
+  .toggle-switch {
+    width: 44px; height: 24px; background: var(--bg3);
+    border: 1px solid var(--border); border-radius: 100px;
+    cursor: pointer; position: relative; transition: background 0.3s;
+  }
+  .toggle-switch.on { background: rgba(200,255,0,0.2); border-color: rgba(200,255,0,0.3); }
+  .toggle-knob {
+    position: absolute; top: 3px; left: 3px;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--muted); transition: transform 0.3s, background 0.3s;
+  }
+  .toggle-switch.on .toggle-knob { transform: translateX(20px); background: var(--accent); }
+  .save-badge {
+    background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.2);
+    border-radius: 100px; padding: 0.2rem 0.6rem;
+    font-size: 0.72rem; color: var(--accent); font-weight: 600;
+  }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+  .price-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 24px; padding: 2.5rem;
+    position: relative; transition: transform 0.3s, border-color 0.3s;
+  }
+  .price-card:hover { transform: translateY(-4px); border-color: rgba(255,255,255,0.12); }
+  .price-card.featured {
+    border-color: var(--accent);
+    background: linear-gradient(160deg, rgba(200,255,0,0.05), var(--card) 60%);
+  }
+  .featured-pill {
+    position: absolute; top: -13px; left: 50%; transform: translateX(-50%);
+    background: var(--accent); color: #0a0a0f;
+    font-size: 0.7rem; font-weight: 700; padding: 0.28rem 1rem;
+    border-radius: 100px; white-space: nowrap; text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .plan-name { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); font-weight: 600; margin-bottom: 0.5rem; }
+  .plan-price { font-family: var(--font-head); font-size: 2.8rem; font-weight: 800; letter-spacing: -0.04em; line-height: 1; }
+  .plan-price sup { font-size: 1rem; vertical-align: super; font-weight: 600; }
+  .plan-price .annual-price { display: none; }
+  .plan-period { font-size: 0.82rem; color: var(--muted); font-weight: 300; margin-top: 0.3rem; }
+  .plan-desc { font-size: 0.85rem; color: var(--muted); font-weight: 300; margin: 1.2rem 0; line-height: 1.7; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+  .plan-features { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; margin-bottom: 2rem; }
+  .plan-features li { font-size: 0.85rem; color: var(--muted); display: flex; align-items: flex-start; gap: 0.6rem; font-weight: 300; line-height: 1.5; }
+  .plan-features li::before { content: '✓'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+  .plan-features li.no { opacity: 0.35; }
+  .plan-features li.no::before { content: '–'; color: var(--muted); }
+  .plan-btn {
+    display: block; text-align: center; padding: 0.9rem;
+    border-radius: 100px; font-size: 0.9rem; font-weight: 500;
+    text-decoration: none; transition: transform 0.2s, opacity 0.2s;
+    background: rgba(255,255,255,0.06); color: var(--text);
+    border: 1px solid var(--border);
+  }
+  .plan-btn:hover { opacity: 0.8; transform: translateY(-1px); }
+  .plan-btn.featured-btn { background: var(--accent); color: #0a0a0f; border: none; }
+
+  .addon-section { margin-top: 4rem; }
+  .addon-title { font-family: var(--font-head); font-size: 1.3rem; font-weight: 800; letter-spacing: -0.02em; margin-bottom: 1.5rem; }
+  .addon-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 1rem; }
+  .addon-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.4rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .addon-card:hover { border-color: rgba(200,255,0,0.15); transform: translateY(-2px); }
+  .addon-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .addon-info h6 { font-size: 0.88rem; font-weight: 500; margin-bottom: 0.25rem; }
+  .addon-info p { font-size: 0.78rem; color: var(--muted); font-weight: 300; margin-bottom: 0.4rem; }
+  .addon-price { font-family: var(--font-head); font-size: 0.9rem; font-weight: 700; color: var(--accent); }
+
+  /* PROCESS TIMELINE */
+  .process-section { padding: 6rem 5%; background: var(--bg2); }
+  .timeline { margin-top: 3.5rem; position: relative; }
+  .timeline::before {
+    content: ''; position: absolute; left: 23px; top: 0; bottom: 0;
+    width: 1px; background: var(--border);
+  }
+  .tl-item { display: flex; gap: 2rem; margin-bottom: 2.5rem; position: relative; }
+  .tl-dot {
+    width: 47px; height: 47px; border-radius: 50%; flex-shrink: 0;
+    background: var(--card); border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-head); font-size: 0.85rem; font-weight: 800;
+    color: var(--accent); position: relative; z-index: 1;
+    transition: background 0.3s, border-color 0.3s;
+  }
+  .tl-item:hover .tl-dot { background: rgba(200,255,0,0.1); border-color: rgba(200,255,0,0.3); }
+  .tl-content { padding-top: 0.6rem; flex: 1; }
+  .tl-content h4 { font-family: var(--font-head); font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+  .tl-content p { font-size: 0.87rem; color: var(--muted); font-weight: 300; line-height: 1.8; max-width: 560px; }
+  .tl-duration { font-size: 0.75rem; color: var(--accent); font-weight: 600; margin-top: 0.4rem; }
+
+  /* GUARANTEE SECTION */
+  .guarantee-section { padding: 5rem 5%; }
+  .guarantee-inner {
+    background: linear-gradient(135deg, rgba(200,255,0,0.06) 0%, rgba(124,58,237,0.04) 100%);
+    border: 1px solid rgba(200,255,0,0.12);
+    border-radius: 28px; padding: 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+  }
+  .guarantee-left { }
+  .guarantee-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.2);
+    border-radius: 100px; padding: 0.35rem 1rem;
+    font-size: 0.78rem; color: var(--accent); font-weight: 600; margin-bottom: 1.2rem;
+  }
+  .guarantee-left h2 { font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -0.03em; line-height: 1.1; margin-bottom: 1rem; }
+  .guarantee-left h2 em { font-style: normal; color: var(--accent); }
+  .guarantee-left p { color: var(--muted); font-weight: 300; font-size: 0.92rem; line-height: 1.9; }
+  .guarantee-cards { display: flex; flex-direction: column; gap: 1rem; }
+  .g-card {
+    background: rgba(255,255,255,0.03); border: 1px solid var(--border);
+    border-radius: 14px; padding: 1.2rem 1.5rem;
+    display: flex; gap: 1rem; align-items: flex-start;
+    transition: border-color 0.2s;
+  }
+  .g-card:hover { border-color: rgba(200,255,0,0.15); }
+  .g-icon { font-size: 1.3rem; flex-shrink: 0; }
+  .g-card h5 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .g-card p { font-size: 0.8rem; color: var(--muted); font-weight: 300; margin: 0; line-height: 1.6; }
+
+  /* CTA */
+  .cta-section {
+    padding: 6rem 5%; text-align: center; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.1) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.1; margin-bottom: 1rem; position: relative; }
+  .cta-section h2 em { font-style: normal; color: var(--accent); }
+  .cta-section p { color: var(--muted); font-weight: 300; max-width: 440px; margin: 0 auto 2.5rem; font-size: 0.95rem; position: relative; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary { background: var(--accent); color: #0a0a0f; padding: 0.9rem 2.2rem; border-radius: 100px; font-weight: 500; text-decoration: none; font-size: 0.95rem; transition: transform 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 0.9rem 2.2rem; border-radius: 100px; border: 1px solid var(--border); font-weight: 400; text-decoration: none; font-size: 0.95rem; transition: border-color 0.2s; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.25); }
+
+  /* FOOTER */
+  footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 3rem 5%; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
+  .footer-logo { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; }
+  .footer-logo span { color: var(--accent); }
+  footer p { color: var(--muted); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.55s ease, transform 0.55s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media (max-width: 960px) {
+    .sb-inner, .guarantee-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    .sb-inner.flip { direction: ltr; }
+    .pricing-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .guarantee-inner { padding: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Growth<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="services-pricing.html" class="active">Services</a></li>
+    <li><a href="casestudies.html">Case Studies</a></li>
+    <li><a href="contactus.html">Contact</a></li>
+  </ul>
+  <a href="contactus.html" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="hero-badge">6 Core Services</div>
+  <h1>What We Do &<br><em>What It Costs</em><br><span class="stroke">No Surprises.</span></h1>
+  <p>Transparent service breakdowns and honest pricing for every channel we manage — so you know exactly what you're getting.</p>
+</div>
+
+<!-- SERVICE TABS -->
+<div class="service-tabs">
+  <a href="#google-ads" class="stab active">🎯 Google Ads</a>
+  <a href="#meta-ads" class="stab">📱 Meta Ads</a>
+  <a href="#brand" class="stab">📢 Brand Promotion</a>
+  <a href="#landing-pages" class="stab">🚀 Landing Pages</a>
+  <a href="#shopify" class="stab">🛍️ Shopify</a>
+  <a href="#woocommerce" class="stab">🔧 WooCommerce</a>
+</div>
+
+<!-- ======================== SERVICE 1: GOOGLE ADS ======================== -->
+<div class="service-block" id="google-ads">
+  <div class="sb-inner">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-green">
+        <div>
+          <div class="visual-icon-big">🎯</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Google Ads Performance</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">Average client results after 90 days</div>
+        </div>
+        <div>
+          <div class="mini-chart">
+            <div class="chart-bar-row">
+              <div class="chart-label">ROAS</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 88%"></div></div>
+              <div class="chart-val">4.8×</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">CTR</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 72%"></div></div>
+              <div class="chart-val">7.2%</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">CPA ↓</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 62%; background: var(--accent2);"></div></div>
+              <div class="chart-val">-38%</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">Q-Score</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 85%"></div></div>
+              <div class="chart-val">8.5/10</div>
+            </div>
+          </div>
+          <div class="visual-tags" style="margin-top: 1.5rem;">
+            <span class="vtag accent">Search</span>
+            <span class="vtag accent">Shopping</span>
+            <span class="vtag accent">YouTube</span>
+            <span class="vtag">Display</span>
+            <span class="vtag">Pmax</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 01</div>
+      <h2>Google Ads<br><em>Management</em></h2>
+      <p>We run data-driven Google campaigns across Search, Shopping, YouTube, and Performance Max — obsessively optimized every week to squeeze the most revenue from every rupee you spend.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Full Account Audit & Setup</h6><p>Campaign structure, keyword research, match types, ad copy, extensions, and tracking setup.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Weekly Bid & Budget Optimization</h6><p>Manual and smart bidding adjustments every 7 days based on performance data.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>A/B Ad Copy Testing</h6><p>Continuous creative testing with statistically significant decisions — never set-and-forget.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Conversion Tracking Setup</h6><p>GA4, Google Ads, and GTM — full attribution so you always know what's converting.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Monthly Strategy Reports</h6><p>Plain-English reports with what worked, what didn't, and what we're doing next month.</p></div>
+        </div>
+      </div>
+      <a href="growthlab-contact.html" class="sb-cta">Start Google Ads →</a>
+      <a href="growthlab-casestudies.html" class="sb-cta-ghost">See Results</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SERVICE 2: META ADS ======================== -->
+<div class="service-block" id="meta-ads">
+  <div class="sb-inner flip">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-blue">
+        <div>
+          <div class="visual-icon-big">📱</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Meta Funnel Performance</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">Typical 90-day funnel results</div>
+        </div>
+        <div class="visual-stats">
+          <div class="vs-item"><div class="vs-num">-45%</div><div class="vs-label">Avg. CPL Drop</div></div>
+          <div class="vs-item"><div class="vs-num">3.4×</div><div class="vs-label">Avg. ROAS</div></div>
+          <div class="vs-item"><div class="vs-num">12+</div><div class="vs-label">Creatives/Month</div></div>
+        </div>
+        <div class="visual-tags">
+          <span class="vtag accent">Facebook</span>
+          <span class="vtag accent">Instagram</span>
+          <span class="vtag accent">Reels</span>
+          <span class="vtag">Stories</span>
+          <span class="vtag">Retargeting</span>
+          <span class="vtag">LLA</span>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 02</div>
+      <h2>Meta Ads<br><em>Management</em></h2>
+      <p>Full-funnel Facebook and Instagram campaigns — from cold audience awareness to retargeting and loyalty. We handle creative strategy, audience architecture, and pixel optimization end to end.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Audience Research & Segmentation</h6><p>Interest stacks, lookalikes, custom audiences, and retargeting layers built for scale.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Creative Strategy & Production Briefs</h6><p>12+ ad concepts/month — static, video, carousel, and UGC-style — always fresh.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Meta Pixel & CAPI Setup</h6><p>Server-side tracking for accurate data even with iOS privacy restrictions.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Full-Funnel Campaign Architecture</h6><p>TOF → MOF → BOF structured campaigns with correct budget splits and objectives.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Weekly Creative Refresh</h6><p>New creatives before ad fatigue sets in — we monitor frequency and act fast.</p></div>
+        </div>
+      </div>
+      <a href="contactus.html" class="sb-cta">Start Meta Ads →</a>
+      <a href="casestudies.html" class="sb-cta-ghost">See Results</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SERVICE 3: BRAND PROMOTION ======================== -->
+<div class="service-block" id="brand">
+  <div class="sb-inner">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-orange">
+        <div>
+          <div class="visual-icon-big">📢</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Brand Growth Metrics</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">3-month brand launch results</div>
+        </div>
+        <div>
+          <div class="mini-chart">
+            <div class="chart-bar-row">
+              <div class="chart-label">Reach</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 95%"></div></div>
+              <div class="chart-val">12M</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">Engage</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 68%"></div></div>
+              <div class="chart-val">4.2%</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">Recall</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 74%; background: var(--accent2);"></div></div>
+              <div class="chart-val">+74%</div>
+            </div>
+          </div>
+          <div class="visual-tags" style="margin-top: 1.5rem;">
+            <span class="vtag accent">Strategy</span>
+            <span class="vtag accent">Positioning</span>
+            <span class="vtag">Influencers</span>
+            <span class="vtag">Content</span>
+            <span class="vtag">PR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 03</div>
+      <h2>Brand<br><em>Promotion</em></h2>
+      <p>We build brands that people remember. From narrative development and positioning strategy to multi-channel awareness campaigns — we make your brand the obvious choice in your category.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Brand Positioning & Messaging</h6><p>Brand story, tone of voice, USP framework, and messaging hierarchy across channels.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Multi-Channel Awareness Campaigns</h6><p>Meta, YouTube, Google Display, and programmatic working together for maximum reach.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Influencer & Creator Strategy</h6><p>Seeding campaigns with 5–20 micro and macro creators in your niche.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Brand Film Direction</h6><p>Brief writing, concept development, and post-production guidance for brand videos.</p></div>
+        </div>
+      </div>
+      <a href="contactus.html" class="sb-cta">Build Your Brand →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SERVICE 4: LANDING PAGES ======================== -->
+<div class="service-block" id="landing-pages">
+  <div class="sb-inner flip">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-purple">
+        <div>
+          <div class="visual-icon-big">🚀</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Landing Page Impact</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">Before & after optimization</div>
+        </div>
+        <div class="visual-stats">
+          <div class="vs-item"><div class="vs-num">3.8%</div><div class="vs-label">Avg. CVR (was 0.9%)</div></div>
+          <div class="vs-item"><div class="vs-num">-52%</div><div class="vs-label">Bounce Rate Drop</div></div>
+          <div class="vs-item"><div class="vs-num">7 days</div><div class="vs-label">Turnaround</div></div>
+        </div>
+        <div class="visual-tags">
+          <span class="vtag accent">Webflow</span>
+          <span class="vtag accent">HTML/CSS</span>
+          <span class="vtag">A/B Test</span>
+          <span class="vtag">CRO</span>
+          <span class="vtag">Copy</span>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 04</div>
+      <h2>Landing Page<br><em>Design & CRO</em></h2>
+      <p>High-converting landing pages built specifically for paid traffic. We design, write copy, and test everything — because a great ad that lands on a mediocre page wastes every rupee.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Campaign-Specific Page Design</h6><p>Every page built to match the exact ad creative and audience intent for maximum relevance.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Conversion Copywriting</h6><p>Headlines, body copy, CTAs, and social proof written to convert — not just to look good.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>A/B Testing Framework</h6><p>Two variants live at once, tested with statistical confidence before declaring a winner.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Speed & Mobile Optimization</h6><p>Sub-2-second load time, fully responsive, Core Web Vitals green across all devices.</p></div>
+        </div>
+      </div>
+      <a href="contactus.html" class="sb-cta">Get Landing Pages →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SERVICE 5: SHOPIFY ======================== -->
+<div class="service-block" id="shopify">
+  <div class="sb-inner">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-teal">
+        <div>
+          <div class="visual-icon-big">🛍️</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">Shopify Store Results</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">Post-optimization averages</div>
+        </div>
+        <div>
+          <div class="mini-chart">
+            <div class="chart-bar-row">
+              <div class="chart-label">Conv. Rate</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 80%"></div></div>
+              <div class="chart-val">3.2%</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">AOV ↑</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 65%"></div></div>
+              <div class="chart-val">+31%</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">Speed</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 90%"></div></div>
+              <div class="chart-val">1.4s</div>
+            </div>
+            <div class="chart-bar-row">
+              <div class="chart-label">Cart Abdn</div>
+              <div class="chart-bar-wrap"><div class="chart-bar" style="width: 55%; background: var(--accent2);"></div></div>
+              <div class="chart-val">-27%</div>
+            </div>
+          </div>
+          <div class="visual-tags" style="margin-top: 1.5rem;">
+            <span class="vtag accent">Setup</span>
+            <span class="vtag accent">CRO</span>
+            <span class="vtag">Apps</span>
+            <span class="vtag">Speed</span>
+            <span class="vtag">Email Flows</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 05</div>
+      <h2>Shopify Store<br><em>Management</em></h2>
+      <p>Complete Shopify management — from initial setup and theme customization to ongoing CRO, app integrations, and performance monitoring. Your store, always running at peak.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Store Setup & Theme Customization</h6><p>Theme selection, customization, product page templates, collections, and navigation.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Checkout Optimization</h6><p>Streamlined checkout flow, payment gateway setup, and cart abandonment recovery.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>App Stack Management</h6><p>Reviews, upsells, email, loyalty, and analytics apps — installed and configured for performance.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Core Web Vitals & Speed</h6><p>Lazy loading, image compression, script deferral — store loads in under 2 seconds.</p></div>
+        </div>
+      </div>
+      <a href="contactus.html" class="sb-cta">Optimize Shopify →</a>
+    </div>
+  </div>
+</div>
+
+<!-- ======================== SERVICE 6: WOOCOMMERCE ======================== -->
+<div class="service-block" id="woocommerce">
+  <div class="sb-inner flip">
+    <div class="sb-visual reveal">
+      <div class="sb-visual-inner glow-pink">
+        <div>
+          <div class="visual-icon-big">🔧</div>
+          <div style="font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem;">WooCommerce Stats</div>
+          <div style="font-size: 0.8rem; color: var(--muted); font-weight: 300;">Average improvement post-management</div>
+        </div>
+        <div class="visual-stats">
+          <div class="vs-item"><div class="vs-num">+170%</div><div class="vs-label">Order Volume</div></div>
+          <div class="vs-item"><div class="vs-num">99.9%</div><div class="vs-label">Uptime Maintained</div></div>
+          <div class="vs-item"><div class="vs-num">2.1s</div><div class="vs-label">Avg Load Time</div></div>
+        </div>
+        <div class="visual-tags">
+          <span class="vtag accent">WordPress</span>
+          <span class="vtag accent">Plugins</span>
+          <span class="vtag">Razorpay</span>
+          <span class="vtag">Security</span>
+          <span class="vtag">Backups</span>
+        </div>
+      </div>
+    </div>
+    <div class="sb-content reveal">
+      <div class="section-label">Service 06</div>
+      <h2>WooCommerce<br><em>Management</em></h2>
+      <p>Expert WooCommerce management for WordPress stores — from plugin configuration and payment gateway integration to performance optimization, security, and ongoing maintenance.</p>
+      <div class="deliverables">
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Full Store Setup & Configuration</h6><p>WooCommerce install, theme setup, product catalogue, shipping zones, and tax config.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Payment Gateway Integration</h6><p>Razorpay, PayU, Stripe, and COD — all properly configured and tested on live and staging.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Plugin Management & Updates</h6><p>Safe plugin updates, compatibility testing, and conflict resolution — no surprise breakdowns.</p></div>
+        </div>
+        <div class="del-item">
+          <div class="del-check">✓</div>
+          <div class="del-text"><h6>Security, Backups & Monitoring</h6><p>Daily backups, malware scanning, uptime monitoring, and SSL maintenance.</p></div>
+        </div>
+      </div>
+      <a href="contactus.html" class="sb-cta">Manage WooCommerce →</a>
+    </div>
+  </div>
+</div>
+
+<!-- COMPARISON TABLE -->
+<div class="compare-section reveal">
+  <div class="section-label">Plan Comparison</div>
+  <h2 class="section-title">Everything in one <em>view</em></h2>
+  <p class="section-sub">Compare what's included across all three plans before you decide.</p>
+  <div class="compare-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th style="width: 36%;">Feature</th>
+          <th>Starter</th>
+          <th class="featured-col">Growth ⭐</th>
+          <th>Scale</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Ad Platforms</td><td>1 Platform</td><td class="featured-col">Google + Meta</td><td>All Platforms</td></tr>
+        <tr><td>Monthly Ad Spend</td><td>Up to ₹1L</td><td class="featured-col">Up to ₹5L</td><td>Unlimited</td></tr>
+        <tr><td>Campaign Setup</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Weekly Optimization</td><td><span class="cross">–</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Performance Reports</td><td>Bi-weekly</td><td class="featured-col">Weekly</td><td>Daily Dashboard</td></tr>
+        <tr><td>Landing Pages / Month</td><td>1 page</td><td class="featured-col">3 pages</td><td>Unlimited</td></tr>
+        <tr><td>A/B Testing</td><td><span class="cross">–</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Shopify / WooCommerce</td><td><span class="cross">–</span></td><td class="featured-col"><span class="check">✓</span> (one store)</td><td><span class="check">✓</span> Multiple stores</td></tr>
+        <tr><td>Brand Promotion Strategy</td><td><span class="cross">–</span></td><td class="featured-col"><span class="partial">Add-on</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Dedicated Account Manager</td><td><span class="cross">–</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span> Dedicated Team</td></tr>
+        <tr><td>Conversion Tracking Setup</td><td><span class="check">✓</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Creative Strategy</td><td><span class="cross">–</span></td><td class="featured-col"><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+        <tr><td>Contract</td><td>Month-to-month</td><td class="featured-col">Month-to-month</td><td>Month-to-month</td></tr>
+        <tr>
+          <td></td>
+          <td><a href="contactus.html" style="color: var(--accent); font-size:0.82rem; font-weight:600; text-decoration:none;">Get Started →</a></td>
+          <td class="featured-col"><a href="contactus.html" style="color: var(--accent); font-size:0.82rem; font-weight:700; text-decoration:none;">Get Started →</a></td>
+          <td><a href="contactus.html" style="color: var(--accent); font-size:0.82rem; font-weight:600; text-decoration:none;">Talk to Sales →</a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- PRICING -->
+<div class="pricing-section" id="pricing">
+  <div class="section-label">Transparent Pricing</div>
+  <h2 class="section-title">Simple. Honest. <em>No lock-in.</em></h2>
+  <p class="section-sub">All plans are month-to-month. Cancel anytime — we earn your business every single month.</p>
+
+  <div class="pricing-toggle">
+    <span class="toggle-label active" id="monthly-label">Monthly</span>
+    <div class="toggle-switch" id="billingToggle" onclick="toggleBilling()">
+      <div class="toggle-knob"></div>
+    </div>
+    <span class="toggle-label" id="annual-label">Annual</span>
+    <span class="save-badge">Save 20%</span>
+  </div>
+
+  <div class="pricing-grid">
+    <div class="price-card reveal">
+      <div class="plan-name">Starter</div>
+      <div class="plan-price">
+        <span class="monthly-price"><sup>₹</sup>24,999</span>
+        <span class="annual-price"><sup>₹</sup>19,999</span>
+      </div>
+      <div class="plan-period">per month · billed monthly</div>
+      <div class="plan-desc">Perfect for brands just starting with paid ads. One platform, clean setup, and results-focused management.</div>
+      <ul class="plan-features">
+        <li>1 Ad Platform (Google or Meta)</li>
+        <li>Up to ₹1L monthly ad spend</li>
+        <li>Campaign setup & full management</li>
+        <li>Bi-weekly performance report</li>
+        <li>1 landing page design per month</li>
+        <li>Conversion tracking setup</li>
+        <li class="no">Shopify / WooCommerce management</li>
+        <li class="no">Dedicated account manager</li>
+        <li class="no">A/B testing</li>
+        <li class="no">Brand strategy</li>
+      </ul>
+      <a href="contactus.html" class="plan-btn">Get Started →</a>
+    </div>
+
+    <div class="price-card featured reveal">
+      <div class="featured-pill">Most Popular</div>
+      <div class="plan-name">Growth</div>
+      <div class="plan-price">
+        <span class="monthly-price"><sup>₹</sup>59,999</span>
+        <span class="annual-price"><sup>₹</sup>47,999</span>
+      </div>
+      <div class="plan-period">per month · billed monthly</div>
+      <div class="plan-desc">For brands ready to scale profitably across Google and Meta with e-commerce support included.</div>
+      <ul class="plan-features">
+        <li>Google Ads + Meta Ads</li>
+        <li>Up to ₹5L monthly ad spend</li>
+        <li>Full campaign management + weekly optimisation</li>
+        <li>Weekly performance reports</li>
+        <li>3 landing pages per month</li>
+        <li>Shopify or WooCommerce support</li>
+        <li>Dedicated account manager</li>
+        <li>A/B testing on ads & pages</li>
+        <li>Creative strategy & briefs</li>
+        <li class="no">Brand promotion strategy</li>
+      </ul>
+      <a href="contactus.html" class="plan-btn featured-btn">Get Started →</a>
+    </div>
+
+    <div class="price-card reveal">
+      <div class="plan-name">Scale</div>
+      <div class="plan-price" style="font-size: 2rem;">Custom</div>
+      <div class="plan-period">enterprise pricing · tailored to you</div>
+      <div class="plan-desc">Full-service growth partner for ambitious brands — every channel, every service, dedicated team.</div>
+      <ul class="plan-features">
+        <li>All platforms & ad channels</li>
+        <li>Unlimited ad spend management</li>
+        <li>Full brand promotion strategy</li>
+        <li>Daily reporting dashboard</li>
+        <li>Unlimited landing pages</li>
+        <li>Full e-commerce management (multi-store)</li>
+        <li>Dedicated team of 3+ specialists</li>
+        <li>Monthly strategy deep-dives</li>
+        <li>Influencer & creator campaigns</li>
+        <li>Priority support (same-day response)</li>
+      </ul>
+      <a href="contactus.html" class="plan-btn">Talk to Sales →</a>
+    </div>
+  </div>
+
+  <!-- ADD-ONS -->
+  <div class="addon-section reveal">
+    <div class="addon-title">À la carte Add-ons</div>
+    <div class="addon-grid">
+      <div class="addon-card">
+        <div class="addon-icon">🎨</div>
+        <div class="addon-info">
+          <h6>Extra Landing Page</h6>
+          <p>Additional campaign page beyond plan limit</p>
+          <div class="addon-price">₹8,999 / page</div>
+        </div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">📊</div>
+        <div class="addon-info">
+          <h6>Analytics Dashboard Setup</h6>
+          <p>Custom GA4 + Looker Studio dashboard</p>
+          <div class="addon-price">₹12,999 one-time</div>
+        </div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🎬</div>
+        <div class="addon-info">
+          <h6>Video Ad Production</h6>
+          <p>Script + editing for Reels/YouTube ads</p>
+          <div class="addon-price">₹15,999 / video</div>
+        </div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">📧</div>
+        <div class="addon-info">
+          <h6>Email / WhatsApp Flows</h6>
+          <p>Klaviyo or WhatsApp automation setup</p>
+          <div class="addon-price">₹18,999 one-time</div>
+        </div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🔍</div>
+        <div class="addon-info">
+          <h6>SEO Audit & Setup</h6>
+          <p>Technical SEO + keyword strategy</p>
+          <div class="addon-price">₹14,999 one-time</div>
+        </div>
+      </div>
+      <div class="addon-card">
+        <div class="addon-icon">🤝</div>
+        <div class="addon-info">
+          <h6>Influencer Campaign</h6>
+          <p>5 micro-influencer seeding campaign</p>
+          <div class="addon-price">₹24,999 / campaign</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PROCESS TIMELINE -->
+<div class="process-section">
+  <div class="section-label">How It Works</div>
+  <h2 class="section-title">From sign-up to <em>results</em></h2>
+  <p class="section-sub">Our onboarding is fast, structured, and designed to get you results in the shortest time possible.</p>
+  <div class="timeline">
+    <div class="tl-item reveal">
+      <div class="tl-dot">01</div>
+      <div class="tl-content">
+        <h4>Discovery Call (Day 1)</h4>
+        <p>30-minute call to understand your business, goals, current setup, competitors, and budget. We ask the right questions so nothing is wasted.</p>
+        <div class="tl-duration">⏱ 30 minutes</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot">02</div>
+      <div class="tl-content">
+        <h4>Custom Strategy Deck (Days 2–3)</h4>
+        <p>We build a tailored 90-day growth plan — channel breakdown, budget allocation, creative direction, KPIs, and milestones. Delivered as a presentation.</p>
+        <div class="tl-duration">⏱ 48 hours turnaround</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot">03</div>
+      <div class="tl-content">
+        <h4>Onboarding & Access (Days 3–5)</h4>
+        <p>You share ad account access, brand assets, and website credentials. We audit everything and set up tracking, pixels, and analytics.</p>
+        <div class="tl-duration">⏱ 2 business days</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot">04</div>
+      <div class="tl-content">
+        <h4>Campaigns Go Live (Day 7)</h4>
+        <p>All campaigns, landing pages, and tracking are live. You get a kickoff report and your dedicated account manager sends the first weekly update on day 14.</p>
+        <div class="tl-duration">⏱ Within 7 days of sign-up</div>
+      </div>
+    </div>
+    <div class="tl-item reveal">
+      <div class="tl-dot">05</div>
+      <div class="tl-content">
+        <h4>Optimise & Scale (Ongoing)</h4>
+        <p>Weekly optimization cycles, monthly strategy reviews, and quarterly planning sessions. We scale what works and cut what doesn't — every single week.</p>
+        <div class="tl-duration">⏱ Every week, forever</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- GUARANTEE -->
+<div class="guarantee-section">
+  <div class="guarantee-inner reveal">
+    <div class="guarantee-left">
+      <div class="guarantee-badge">🛡️ Our Promise</div>
+      <h2>We work until<br><em>it works.</em></h2>
+      <p>We don't hide behind vanity metrics or make excuses. If we're managing your campaigns, we're accountable for the results — and we'll keep optimizing until we hit your targets.</p>
+    </div>
+    <div class="guarantee-cards">
+      <div class="g-card">
+        <div class="g-icon">📅</div>
+        <div>
+          <h5>No Lock-in Contracts</h5>
+          <p>Month-to-month always. If you're not happy, you're free to leave — no penalty, no hassle.</p>
+        </div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">📊</div>
+        <div>
+          <h5>Full Transparency</h5>
+          <p>You own all your accounts and data. We never hold assets hostage or hide performance numbers.</p>
+        </div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">⚡</div>
+        <div>
+          <h5>Fast Response SLA</h5>
+          <p>All clients get a response within 24 hours. Scale plan clients get same-day response, always.</p>
+        </div>
+      </div>
+      <div class="g-card">
+        <div class="g-icon">🎯</div>
+        <div>
+          <h5>ROAS-First Mindset</h5>
+          <p>Every decision we make is tied to revenue — not impressions, not reach, not clicks.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Ready to pick your<br><em>plan and grow?</em></h2>
+  <p>Fill in the contact form and we'll have a strategy ready for you within 48 hours.</p>
+  <div class="cta-btns">
+    <a href="contactus.html" class="btn-primary">Start Today →</a>
+    <a href="casestudies.html" class="btn-secondary">See Case Studies</a>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Growth<span>Lab</span></div>
+    <p style="margin-top: 0.4rem;">Performance Marketing for ambitious brands.</p>
+  </div>
+  <div class="footer-links">
+    <a href="services.html">Services</a>
+    <a href="casestudies.html">Case Studies</a>
+    <a href="contactus.html">Contact</a>
+    <a href="index.html">Home</a>
+  </div>
+  <p>© 2025 GrowthLab. All rights reserved.</p>
+</footer>
+
+<script>
+// Billing toggle
+let isAnnual = false;
+function toggleBilling() {
+  isAnnual = !isAnnual;
+  const toggle = document.getElementById('billingToggle');
+  const mLabel = document.getElementById('monthly-label');
+  const aLabel = document.getElementById('annual-label');
+  toggle.classList.toggle('on', isAnnual);
+  mLabel.classList.toggle('active', !isAnnual);
+  aLabel.classList.toggle('active', isAnnual);
+  document.querySelectorAll('.monthly-price').forEach(el => el.style.display = isAnnual ? 'none' : 'inline');
+  document.querySelectorAll('.annual-price').forEach(el => el.style.display = isAnnual ? 'inline' : 'none');
+  document.querySelectorAll('.plan-period').forEach((el, i) => {
+    const texts = ['per month · billed monthly', 'per month · billed annually', 'enterprise pricing · tailored to you'];
+    if (i < 2) el.textContent = isAnnual ? texts[1] : texts[0];
+  });
+}
+
+// Service tab active state on scroll
+const sections = document.querySelectorAll('.service-block[id]');
+const tabs = document.querySelectorAll('.stab');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+  tabs.forEach(t => {
+    t.classList.toggle('active', t.getAttribute('href') === '#' + current);
+  });
+});
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.08 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Smooth scroll for tab clicks
+document.querySelectorAll('.stab').forEach(tab => {
+  tab.addEventListener('click', e => {
+    const target = document.querySelector(tab.getAttribute('href'));
+    if (target) { e.preventDefault(); window.scrollTo({ top: target.offsetTop - 90, behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
