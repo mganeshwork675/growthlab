@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Studies — GrowthLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --card: #15151e;
+    --accent: #c8ff00;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --text: #f0f0f0;
+    --muted: #888899;
+    --border: rgba(255,255,255,0.07);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo { font-family: var(--font-head); font-size: 1.4rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; display: block; }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--text); }
+  .nav-cta { background: var(--accent); color: #0a0a0f; border: none; padding: 0.6rem 1.4rem; border-radius: 100px; font-family: var(--font-body); font-size: 0.88rem; font-weight: 500; cursor: pointer; text-decoration: none; transition: transform 0.2s, opacity 0.2s; }
+  .nav-cta:hover { transform: scale(1.03); opacity: 0.9; }
+
+  /* ---- HERO ---- */
+  .page-hero {
+    padding: 10rem 5% 5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; top: -150px; left: 50%; transform: translateX(-50%);
+    width: 600px; height: 600px;
+    background: radial-gradient(ellipse, rgba(200,255,0,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,255,0,0.1);
+    border: 1px solid rgba(200,255,0,0.25);
+    border-radius: 100px;
+    padding: 0.35rem 1rem;
+    font-size: 0.8rem; color: var(--accent);
+    margin-bottom: 1.5rem; font-weight: 500;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .page-hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.04em;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  .page-hero h1 em { font-style: normal; color: var(--accent); }
+  .page-hero p {
+    margin-top: 1.2rem; color: var(--muted); font-size: 1.05rem;
+    max-width: 500px; margin-left: auto; margin-right: auto;
+    font-weight: 300; animation: fadeUp 0.5s 0.2s ease both;
+  }
+
+  /* ---- FILTER TABS ---- */
+  .filter-bar {
+    display: flex; justify-content: center; gap: 0.6rem;
+    padding: 2rem 5% 0;
+    flex-wrap: wrap;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .filter-btn {
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1.2rem;
+    color: var(--muted);
+    font-family: var(--font-body);
+    font-size: 0.84rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .filter-btn.active { background: var(--accent); color: #0a0a0f; border-color: var(--accent); font-weight: 500; }
+
+  /* ---- FEATURED CASE STUDY ---- */
+  .featured-section { padding: 4rem 5% 2rem; }
+  .featured-card {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    overflow: hidden;
+    background: var(--card);
+    transition: border-color 0.3s;
+  }
+  .featured-card:hover { border-color: rgba(200,255,0,0.2); }
+  .featured-image {
+    position: relative;
+    min-height: 480px;
+    overflow: hidden;
+  }
+  .featured-image img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.6s ease;
+  }
+  .featured-card:hover .featured-image img { transform: scale(1.04); }
+  .img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,15,0.3) 0%, transparent 60%);
+  }
+  .featured-badge-img {
+    position: absolute; top: 1.5rem; left: 1.5rem;
+    background: var(--accent); color: #0a0a0f;
+    font-size: 0.72rem; font-weight: 700;
+    padding: 0.3rem 0.9rem; border-radius: 100px;
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .featured-content {
+    padding: 3rem;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+  .case-tag {
+    display: inline-block;
+    background: rgba(200,255,0,0.1);
+    border: 1px solid rgba(200,255,0,0.2);
+    color: var(--accent);
+    font-size: 0.75rem; font-weight: 500;
+    padding: 0.25rem 0.8rem; border-radius: 100px;
+    margin-bottom: 1.2rem;
+  }
+  .featured-content h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.6rem, 3vw, 2.2rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.2;
+    margin-bottom: 1rem;
+  }
+  .featured-content p { color: var(--muted); font-weight: 300; font-size: 0.92rem; line-height: 1.8; margin-bottom: 2rem; }
+  .metrics-row { display: flex; gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .metric-item { }
+  .metric-num {
+    font-family: var(--font-head);
+    font-size: 1.8rem; font-weight: 800;
+    color: var(--accent); line-height: 1;
+  }
+  .metric-label { font-size: 0.75rem; color: var(--muted); margin-top: 0.2rem; }
+  .read-btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: var(--accent); color: #0a0a0f;
+    padding: 0.75rem 1.5rem; border-radius: 100px;
+    font-weight: 500; font-size: 0.88rem;
+    text-decoration: none; transition: transform 0.2s;
+    align-self: flex-start;
+  }
+  .read-btn:hover { transform: translateX(3px); }
+
+  /* ---- CASE STUDIES GRID ---- */
+  .grid-section { padding: 2rem 5% 5rem; }
+  .cases-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+  .case-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  .case-card.visible { opacity: 1; transform: translateY(0); transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.3s; }
+  .case-card:hover { transform: translateY(-5px); border-color: rgba(200,255,0,0.18); }
+  .case-img-wrap {
+    position: relative;
+    height: 220px;
+    overflow: hidden;
+  }
+  .case-img-wrap img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+  .case-card:hover .case-img-wrap img { transform: scale(1.06); }
+  .case-img-overlay {
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,10,15,0.7) 0%, transparent 50%);
+  }
+  .case-category {
+    position: absolute; top: 1rem; left: 1rem;
+    background: rgba(10,10,15,0.7);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.72rem; color: var(--text); font-weight: 500;
+  }
+  .case-result-pill {
+    position: absolute; bottom: 1rem; right: 1rem;
+    background: var(--accent); color: #0a0a0f;
+    border-radius: 100px; padding: 0.3rem 0.8rem;
+    font-size: 0.75rem; font-weight: 700;
+    font-family: var(--font-head);
+  }
+  .case-body { padding: 1.5rem; }
+  .case-client { font-size: 0.75rem; color: var(--muted); font-weight: 400; margin-bottom: 0.4rem; text-transform: uppercase; letter-spacing: 0.08em; }
+  .case-body h3 { font-family: var(--font-head); font-size: 1.1rem; font-weight: 700; letter-spacing: -0.02em; line-height: 1.3; margin-bottom: 0.7rem; }
+  .case-body p { color: var(--muted); font-size: 0.85rem; font-weight: 300; line-height: 1.7; margin-bottom: 1.2rem; }
+  .case-metrics { display: flex; gap: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border); }
+  .cm-item { }
+  .cm-num { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; color: var(--accent); }
+  .cm-label { font-size: 0.72rem; color: var(--muted); }
+  .case-footer { display: flex; align-items: center; justify-content: space-between; margin-top: 1.2rem; }
+  .case-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+  .ctag {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid var(--border);
+    border-radius: 100px; padding: 0.2rem 0.6rem;
+    font-size: 0.7rem; color: var(--muted);
+  }
+  .arrow-btn {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: rgba(200,255,0,0.1);
+    border: 1px solid rgba(200,255,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 0.85rem;
+    flex-shrink: 0; transition: background 0.2s;
+  }
+  .case-card:hover .arrow-btn { background: var(--accent); color: #0a0a0f; }
+
+  /* ---- STATS BANNER ---- */
+  .stats-banner {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 3.5rem 5%;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    text-align: center;
+  }
+  .sb-num {
+    font-family: var(--font-head);
+    font-size: 2.5rem; font-weight: 800;
+    letter-spacing: -0.03em; color: var(--accent);
+  }
+  .sb-label { font-size: 0.82rem; color: var(--muted); margin-top: 0.3rem; font-weight: 300; }
+
+  /* ---- CTA SECTION ---- */
+  .cta-section {
+    padding: 6rem 5%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-section::before {
+    content: '';
+    position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 500px; height: 500px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .cta-section h2 {
+    font-family: var(--font-head);
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 800; letter-spacing: -0.04em; line-height: 1.1;
+    margin-bottom: 1rem; position: relative;
+  }
+  .cta-section h2 em { font-style: normal; color: var(--accent); }
+  .cta-section p { color: var(--muted); font-weight: 300; max-width: 440px; margin: 0 auto 2.5rem; font-size: 0.95rem; position: relative; }
+  .cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary { background: var(--accent); color: #0a0a0f; padding: 0.9rem 2.2rem; border-radius: 100px; font-weight: 500; text-decoration: none; font-size: 0.95rem; transition: transform 0.2s; }
+  .btn-primary:hover { transform: translateY(-2px); }
+  .btn-secondary { background: transparent; color: var(--text); padding: 0.9rem 2.2rem; border-radius: 100px; border: 1px solid var(--border); font-weight: 400; text-decoration: none; font-size: 0.95rem; transition: border-color 0.2s; }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.25); }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--bg2);
+    border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; }
+  .footer-logo span { color: var(--accent); }
+  footer p { color: var(--muted); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ---- MODAL ---- */
+  .modal-bg {
+    display: none;
+    position: fixed; inset: 0; z-index: 200;
+    background: rgba(5,5,10,0.92);
+    backdrop-filter: blur(10px);
+    overflow-y: auto;
+    padding: 3rem 5%;
+  }
+  .modal-bg.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal {
+    background: var(--card);
+    border: 1px solid rgba(200,255,0,0.15);
+    border-radius: 24px;
+    max-width: 780px; width: 100%;
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    animation: fadeUp 0.3s ease;
+  }
+  .modal-img { width: 100%; height: 280px; object-fit: cover; display: block; }
+  .modal-body { padding: 2.5rem; }
+  .modal-body .case-tag { margin-bottom: 1rem; }
+  .modal-body h2 { font-family: var(--font-head); font-size: 1.8rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem; }
+  .modal-body p { color: var(--muted); font-weight: 300; font-size: 0.92rem; line-height: 1.9; margin-bottom: 1.2rem; }
+  .modal-metrics { display: flex; gap: 2rem; background: var(--bg3); border-radius: 14px; padding: 1.5rem; margin: 1.5rem 0; flex-wrap: wrap; }
+  .mm-item { }
+  .mm-num { font-family: var(--font-head); font-size: 2rem; font-weight: 800; color: var(--accent); }
+  .mm-label { font-size: 0.78rem; color: var(--muted); }
+  .close-btn {
+    position: absolute; top: 1rem; right: 1rem;
+    background: rgba(255,255,255,0.08); border: 1px solid var(--border);
+    border-radius: 50%; width: 36px; height: 36px;
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; color: var(--text); font-size: 1rem;
+    transition: background 0.2s;
+  }
+  .close-btn:hover { background: rgba(255,255,255,0.15); }
+  .modal-section-title { font-family: var(--font-head); font-size: 1rem; font-weight: 700; margin: 1.5rem 0 0.7rem; color: var(--text); }
+  .modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; }
+  .modal-list li { font-size: 0.88rem; color: var(--muted); display: flex; gap: 0.6rem; font-weight: 300; }
+  .modal-list li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .featured-card { grid-template-columns: 1fr; }
+    .featured-image { min-height: 260px; }
+    .stats-banner { grid-template-columns: repeat(2,1fr); }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .stats-banner { grid-template-columns: 1fr 1fr; }
+    .cases-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="growthlab-agency.html" class="logo">Growth<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="growthlab-agency.html#services">Services</a></li>
+    <li><a href="growthlab-agency.html#results">Results</a></li>
+    <li><a href="growthlab-agency.html#pricing">Pricing</a></li>
+    <li><a href="#" class="active">Case Studies</a></li>
+    <li><a href="growthlab-agency.html#contact">Contact</a></li>
+  </ul>
+  <a href="growthlab-agency.html#contact" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-badge">Proven Results</div>
+  <h1>Real Brands.<br><em>Real Growth.</em></h1>
+  <p>Explore how we've scaled businesses across industries with performance marketing, paid ads, and e-commerce strategy.</p>
+</div>
+
+<!-- FILTER BAR -->
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterCases('all', this)">All Cases</button>
+  <button class="filter-btn" onclick="filterCases('google', this)">Google Ads</button>
+  <button class="filter-btn" onclick="filterCases('meta', this)">Meta Ads</button>
+  <button class="filter-btn" onclick="filterCases('shopify', this)">Shopify</button>
+  <button class="filter-btn" onclick="filterCases('woocommerce', this)">WooCommerce</button>
+  <button class="filter-btn" onclick="filterCases('brand', this)">Brand Promotion</button>
+</div>
+
+<!-- STATS BANNER -->
+<div class="stats-banner">
+  <div>
+    <div class="sb-num">200+</div>
+    <div class="sb-label">Brands Scaled</div>
+  </div>
+  <div>
+    <div class="sb-num">₹84Cr</div>
+    <div class="sb-label">Ad Spend Managed</div>
+  </div>
+  <div>
+    <div class="sb-num">3.8×</div>
+    <div class="sb-label">Average ROAS</div>
+  </div>
+  <div>
+    <div class="sb-num">97%</div>
+    <div class="sb-label">Client Retention</div>
+  </div>
+</div>
+
+<!-- FEATURED CASE STUDY -->
+<section class="featured-section">
+  <div class="featured-card" onclick="openModal('stylekart')">
+    <div class="featured-image">
+      <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80" alt="StyleKart Fashion D2C">
+      <div class="img-overlay"></div>
+      <div class="featured-badge-img">Featured Case Study</div>
+    </div>
+    <div class="featured-content">
+      <span class="case-tag">Google Ads + Shopify</span>
+      <h2>How StyleKart Scaled from ₹50K to ₹3L Monthly Ad Spend at 4.8× ROAS</h2>
+      <p>StyleKart was running Google Shopping campaigns in-house with a 2.1× ROAS and plateauing revenue. We took over, rebuilt the campaign architecture, and unlocked profitable scale in 90 days.</p>
+      <div class="metrics-row">
+        <div class="metric-item">
+          <div class="metric-num">4.8×</div>
+          <div class="metric-label">Final ROAS</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">6×</div>
+          <div class="metric-label">Budget Scaled</div>
+        </div>
+        <div class="metric-item">
+          <div class="metric-num">₹2.4Cr</div>
+          <div class="metric-label">Revenue in 6 Months</div>
+        </div>
+      </div>
+      <a class="read-btn" onclick="event.stopPropagation(); openModal('stylekart')">Read Full Case Study →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CASES GRID -->
+<section class="grid-section">
+  <div class="cases-grid" id="casesGrid">
+
+    <!-- Case 1 -->
+    <div class="case-card" data-category="meta brand" onclick="openModal('organiq')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80" alt="OrganiQ">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">Meta Ads</span>
+        <span class="case-result-pill">-45% CPL</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">OrganiQ — Health & Wellness</div>
+        <h3>Cutting Cost per Lead by 45% for a D2C Supplement Brand</h3>
+        <p>Meta funnel rebuild with fresh creatives, audience segmentation, and a new landing page reduced CPL from ₹380 to ₹209 within 30 days.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">₹209</div><div class="cm-label">Cost per Lead</div></div>
+          <div class="cm-item"><div class="cm-num">3.2×</div><div class="cm-label">ROAS</div></div>
+          <div class="cm-item"><div class="cm-num">30 days</div><div class="cm-label">To Results</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">Meta Ads</span><span class="ctag">Landing Page</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="case-card" data-category="shopify google" onclick="openModal('edpath')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=700&q=80" alt="EdPath">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">Google Ads</span>
+        <span class="case-result-pill">2.1× Conversions</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">EdPath — EdTech Platform</div>
+        <h3>Doubling Course Enrollments with Google Search & a Redesigned Funnel</h3>
+        <p>EdPath was paying ₹1,800 per enrollment. After keyword restructuring, Quality Score improvements, and landing page CRO, we brought it down to ₹740.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">₹740</div><div class="cm-label">Cost/Enrolment</div></div>
+          <div class="cm-item"><div class="cm-num">5.2×</div><div class="cm-label">ROAS</div></div>
+          <div class="cm-item"><div class="cm-num">60 days</div><div class="cm-label">Timeline</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">Google Ads</span><span class="ctag">CRO</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 3 -->
+    <div class="case-card" data-category="shopify" onclick="openModal('furnovo')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80" alt="Furnovo">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">Shopify</span>
+        <span class="case-result-pill">3.2% CVR</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Furnovo — Home Furniture</div>
+        <h3>Shopify CRO That Tripled Conversion Rate for a Furniture Brand</h3>
+        <p>A slow, cluttered Shopify store converting at 0.9%. We rebuilt product pages, optimized checkout, and added social proof — hitting 3.2% in 8 weeks.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">0.9→3.2%</div><div class="cm-label">Conv. Rate</div></div>
+          <div class="cm-item"><div class="cm-num">+218%</div><div class="cm-label">Revenue Lift</div></div>
+          <div class="cm-item"><div class="cm-num">8 weeks</div><div class="cm-label">Timeline</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">Shopify</span><span class="ctag">CRO</span><span class="ctag">UX</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 4 -->
+    <div class="case-card" data-category="woocommerce google" onclick="openModal('bakerystory')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700&q=80" alt="Bakery Story">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">WooCommerce</span>
+        <span class="case-result-pill">+170% Orders</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">Bakery Story — Artisan Bakery</div>
+        <h3>WooCommerce Revamp + Google Ads That Grew Orders by 170%</h3>
+        <p>A local bakery with a broken WooCommerce checkout and zero paid presence. We fixed the store and launched hyper-local Google campaigns for ₹15K/month.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">+170%</div><div class="cm-label">Monthly Orders</div></div>
+          <div class="cm-item"><div class="cm-num">4.1×</div><div class="cm-label">ROAS</div></div>
+          <div class="cm-item"><div class="cm-num">45 days</div><div class="cm-label">Timeline</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">WooCommerce</span><span class="ctag">Local Ads</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 5 -->
+    <div class="case-card" data-category="brand meta" onclick="openModal('luxewatch')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&q=80" alt="LuxeWatch">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">Brand Promotion</span>
+        <span class="case-result-pill">12M Impressions</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">LuxeWatch Co — Premium Watches</div>
+        <h3>Brand Awareness Campaign That Drove 12M Impressions & ₹80L Revenue</h3>
+        <p>A new watch brand entering a crowded market. We built a full brand narrative, launched Meta awareness campaigns, and established a premium positioning in 3 months.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">12M</div><div class="cm-label">Impressions</div></div>
+          <div class="cm-item"><div class="cm-num">₹80L</div><div class="cm-label">Revenue</div></div>
+          <div class="cm-item"><div class="cm-num">3.6×</div><div class="cm-label">ROAS</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">Brand</span><span class="ctag">Meta Ads</span><span class="ctag">Creative</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Case 6 -->
+    <div class="case-card" data-category="google meta" onclick="openModal('fitpulse')">
+      <div class="case-img-wrap">
+        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=80" alt="FitPulse">
+        <div class="case-img-overlay"></div>
+        <span class="case-category">Google + Meta</span>
+        <span class="case-result-pill">₹1.2Cr Revenue</span>
+      </div>
+      <div class="case-body">
+        <div class="case-client">FitPulse — Fitness Equipment</div>
+        <h3>Full-Funnel Strategy That Generated ₹1.2Cr in 90 Days</h3>
+        <p>Cold audience Meta ads at the top, Google Shopping retargeting at the bottom. A complete funnel built from scratch delivered ₹1.2Cr revenue in the first quarter.</p>
+        <div class="case-metrics">
+          <div class="cm-item"><div class="cm-num">₹1.2Cr</div><div class="cm-label">Revenue</div></div>
+          <div class="cm-item"><div class="cm-num">4.4×</div><div class="cm-label">Blended ROAS</div></div>
+          <div class="cm-item"><div class="cm-num">90 days</div><div class="cm-label">Timeline</div></div>
+        </div>
+        <div class="case-footer">
+          <div class="case-tags"><span class="ctag">Google</span><span class="ctag">Meta</span><span class="ctag">Full Funnel</span></div>
+          <div class="arrow-btn">→</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <h2>Want results like<br><em>these for your brand?</em></h2>
+  <p>Let's talk about your goals and build a custom growth strategy — free, no obligation.</p>
+  <div class="cta-btns">
+    <a href="growthlab-agency.html#contact" class="btn-primary">Start Your Case Study →</a>
+    <a href="growthlab-agency.html#pricing" class="btn-secondary">View Pricing</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Growth<span>Lab</span></div>
+    <p style="margin-top: 0.4rem;">Performance Marketing for ambitious brands.</p>
+  </div>
+  <div class="footer-links">
+    <a href="growthlab-agency.html#services">Services</a>
+    <a href="growthlab-agency.html#pricing">Pricing</a>
+    <a href="#">Case Studies</a>
+    <a href="growthlab-agency.html#contact">Contact</a>
+  </div>
+  <p>© 2025 GrowthLab. All rights reserved.</p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg" onclick="closeModal(event)">
+  <div class="modal" id="modalContent"></div>
+</div>
+
+<script>
+const caseData = {
+  stylekart: {
+    tag: 'Google Ads + Shopify',
+    title: 'How StyleKart Scaled from ₹50K to ₹3L Monthly Ad Spend at 4.8× ROAS',
+    img: 'https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=900&q=80',
+    challenge: 'StyleKart was managing Google Shopping in-house with a 2.1× ROAS, spending ₹50K/month. Revenue had plateaued for 3 months and the team lacked the bandwidth to test and optimize properly.',
+    solution: 'We audited their entire campaign structure, rebuilt Shopping feeds, segmented campaigns by margin tier, introduced Performance Max alongside Manual Shopping, and A/B tested 12 landing page variants.',
+    results: [
+      { num: '4.8×', label: 'Final ROAS' },
+      { num: '6×', label: 'Budget Scaled' },
+      { num: '₹2.4Cr', label: 'Revenue in 6 Months' },
+      { num: '90 days', label: 'To Full Scale' }
+    ],
+    actions: ['Rebuilt campaign architecture from scratch', 'Introduced tiered bidding by product margin', 'Created high-converting PDPs on Shopify', 'Weekly creative refresh cycle for Shopping ads', 'Performance Max layered on top of manual campaigns']
+  },
+  organiq: {
+    tag: 'Meta Ads + Landing Page',
+    title: 'Cutting Cost per Lead by 45% for a D2C Supplement Brand',
+    img: 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=700&q=80',
+    challenge: 'OrganiQ was spending ₹1.5L/month on Meta Ads with a CPL of ₹380. Creatives were stale, audiences were over-saturated, and the landing page had no clear CTA above the fold.',
+    solution: 'We refreshed the entire creative suite with UGC-style videos, rebuilt audience segmentation using LLAs and interest stacks, and redesigned the landing page with a quiz funnel to pre-qualify leads.',
+    results: [
+      { num: '₹209', label: 'New CPL' },
+      { num: '-45%', label: 'CPL Reduction' },
+      { num: '3.2×', label: 'ROAS' },
+      { num: '30 days', label: 'To Results' }
+    ],
+    actions: ['UGC-style creative production (12 new ads)', 'Lookalike and interest-based audience rebuild', 'Quiz funnel landing page design', 'Retargeting sequence for warm audiences', 'Weekly creative performance analysis']
+  },
+  edpath: {
+    tag: 'Google Ads + CRO',
+    title: 'Doubling Course Enrollments with Google Search & a Redesigned Funnel',
+    img: 'https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=700&q=80',
+    challenge: 'EdPath was paying ₹1,800 per course enrollment via Google Search. Quality Scores were low (avg. 4/10), keywords were broad-matched to irrelevant queries, and the landing page had a 78% bounce rate.',
+    solution: 'We restructured campaigns by course category, tightened keyword match types, improved ad copy relevance to boost Quality Scores to 8+, and redesigned the landing page with social proof and a 3-step enrollment flow.',
+    results: [
+      { num: '₹740', label: 'New Cost/Enrolment' },
+      { num: '5.2×', label: 'ROAS' },
+      { num: '+110%', label: 'Enrollment Volume' },
+      { num: '60 days', label: 'Timeline' }
+    ],
+    actions: ['Full Google Search account restructure', 'Quality Score optimization to 8+ avg', 'New landing page with social proof elements', 'Enrollment funnel A/B testing', 'Negative keyword list of 400+ terms added']
+  },
+  furnovo: {
+    tag: 'Shopify CRO',
+    title: 'Shopify CRO That Tripled Conversion Rate for a Furniture Brand',
+    img: 'https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=700&q=80',
+    challenge: 'Furnovo had good traffic from organic and paid sources but a 0.9% conversion rate. Product pages lacked detail, checkout had 5 unnecessary steps, and mobile UX was broken.',
+    solution: 'Complete Shopify theme overhaul — rebuilt product pages with 360° images, dimension guides, and customer reviews. Streamlined checkout to 2 steps. Added urgency triggers, EMI options, and a live chat widget.',
+    results: [
+      { num: '0.9→3.2%', label: 'Conversion Rate' },
+      { num: '+218%', label: 'Revenue Lift' },
+      { num: '-1.8s', label: 'Page Load Improvement' },
+      { num: '8 weeks', label: 'Timeline' }
+    ],
+    actions: ['Full Shopify theme rebuild (mobile-first)', 'Product page redesign with video and 360° view', 'Checkout streamlined from 5 to 2 steps', 'App integrations: reviews, EMI, live chat', 'Core Web Vitals optimized for speed']
+  },
+  bakerystory: {
+    tag: 'WooCommerce + Google Ads',
+    title: 'WooCommerce Revamp + Google Ads That Grew Orders by 170%',
+    img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?w=700&q=80',
+    challenge: 'Bakery Story had a broken WooCommerce checkout (payments failing on mobile), no paid ads, and relied entirely on word-of-mouth. They wanted to expand delivery zones and increase online orders.',
+    solution: 'Fixed WooCommerce checkout and integrated Razorpay. Built a hyper-local Google Ads campaign targeting a 15km radius. Created seasonal offer landing pages for birthdays, anniversaries, and festivals.',
+    results: [
+      { num: '+170%', label: 'Monthly Orders' },
+      { num: '4.1×', label: 'ROAS' },
+      { num: '₹15K', label: 'Monthly Ad Spend' },
+      { num: '45 days', label: 'Timeline' }
+    ],
+    actions: ['WooCommerce checkout bug fix + Razorpay integration', 'Hyper-local Google Search campaigns', 'Seasonal landing pages (6 occasions)', 'Google Business Profile optimization', 'WhatsApp order confirmation automation']
+  },
+  luxewatch: {
+    tag: 'Brand Promotion + Meta Ads',
+    title: 'Brand Awareness Campaign That Drove 12M Impressions & ₹80L Revenue',
+    img: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700&q=80',
+    challenge: 'LuxeWatch Co was a new premium watch brand with no online presence, entering a market dominated by legacy brands. Their challenge was establishing credibility and premium positioning from scratch.',
+    solution: 'We developed a complete brand identity framework, produced a brand film, ran Meta awareness campaigns targeting luxury buyers, and built a Shopify storefront with editorial-grade product photography direction.',
+    results: [
+      { num: '12M', label: 'Total Impressions' },
+      { num: '₹80L', label: 'Revenue in 3 Months' },
+      { num: '3.6×', label: 'ROAS' },
+      { num: '4.2%', label: 'Engagement Rate' }
+    ],
+    actions: ['Brand narrative and positioning strategy', 'Brand film production and direction', 'Meta awareness + conversion campaign split', 'Influencer seeding campaign (8 creators)', 'Shopify store design with editorial layout']
+  },
+  fitpulse: {
+    tag: 'Google Ads + Meta Ads',
+    title: 'Full-Funnel Strategy That Generated ₹1.2Cr in 90 Days',
+    img: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=700&q=80',
+    challenge: 'FitPulse was a new fitness equipment brand with a decent product range but zero paid presence. They had a ₹4L/month budget and wanted maximum revenue impact in the shortest time.',
+    solution: 'We built a full-funnel from scratch — Meta video ads for cold awareness → Instagram carousel retargeting → Google Shopping for high-intent buyers. All three stages were optimized weekly.',
+    results: [
+      { num: '₹1.2Cr', label: 'Revenue in 90 Days' },
+      { num: '4.4×', label: 'Blended ROAS' },
+      { num: '₹4L', label: 'Monthly Spend' },
+      { num: '90 days', label: 'Timeline' }
+    ],
+    actions: ['Meta cold audience video campaigns', 'Instagram carousel retargeting sequences', 'Google Shopping + Performance Max setup', 'Weekly cross-channel budget rebalancing', 'Creative refresh every 2 weeks to fight fatigue']
+  }
+};
+
+function openModal(id) {
+  const d = caseData[id];
+  if (!d) return;
+  const metricsHTML = d.results.map(r => `<div class="mm-item"><div class="mm-num">${r.num}</div><div class="mm-label">${r.label}</div></div>`).join('');
+  const actionsHTML = d.actions.map(a => `<li>${a}</li>`).join('');
+  document.getElementById('modalContent').innerHTML = `
+    <button class="close-btn" onclick="document.getElementById('modalBg').classList.remove('open')">✕</button>
+    <img class="modal-img" src="${d.img}" alt="${d.title}">
+    <div class="modal-body">
+      <span class="case-tag">${d.tag}</span>
+      <h2>${d.title}</h2>
+      <div class="modal-metrics">${metricsHTML}</div>
+      <p class="modal-section-title">The Challenge</p>
+      <p>${d.challenge}</p>
+      <p class="modal-section-title">Our Approach</p>
+      <p>${d.solution}</p>
+      <p class="modal-section-title">What We Did</p>
+      <ul class="modal-list">${actionsHTML}</ul>
+    </div>
+  `;
+  document.getElementById('modalBg').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modalBg')) {
+    document.getElementById('modalBg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+}
+
+function filterCases(cat, btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.case-card').forEach(card => {
+    const cats = card.dataset.category || '';
+    if (cat === 'all' || cats.includes(cat)) {
+      card.style.display = '';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+}
+
+// Scroll reveal
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) {
+      setTimeout(() => e.target.classList.add('visible'), i * 80);
+    }
+  });
+}, { threshold: 0.1 });
+document.querySelectorAll('.case-card').forEach(el => observer.observe(el));
+
+// Close modal on ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('modalBg').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+</body>
+</html>
