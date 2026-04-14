@@ -19,7 +19,7 @@ A modern, fully responsive single-page agency website built with HTML, CSS, and 
 - No frameworks, no dependencies
 
 ## Usage
-Just open `index.html` in any browser — no build step required.
+Just open `https://growthlab.work-ganeshmohapatra675.workers.dev/` in any browser — no build step required.
 
 ## Deployment
-Hosted on [Netlify / GitHub Pages / Vercel] — deploy by dropping the HTML file.
+Hosted on [Cloudflare/ GitHub Pages] — deploy by integrating the HTML file.
