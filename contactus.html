@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact Us — GrowthLab</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg2: #111118;
+    --bg3: #1a1a24;
+    --card: #15151e;
+    --accent: #c8ff00;
+    --accent2: #ff6b35;
+    --accent3: #7c3aed;
+    --text: #f0f0f0;
+    --muted: #888899;
+    --border: rgba(255,255,255,0.07);
+    --font-head: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ---- NAV ---- */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 5%;
+    background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: var(--font-head); font-size: 1.4rem; font-weight: 800;
+    letter-spacing: -0.03em; color: var(--text); text-decoration: none;
+  }
+  .logo span { color: var(--accent); }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--muted); text-decoration: none; font-size: 0.9rem; font-weight: 400; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--text); }
+  .nav-links a.active { color: var(--text); }
+  .nav-cta {
+    background: var(--accent); color: #0a0a0f; border: none;
+    padding: 0.6rem 1.4rem; border-radius: 100px;
+    font-family: var(--font-body); font-size: 0.88rem; font-weight: 500;
+    cursor: pointer; text-decoration: none; transition: transform 0.2s, opacity 0.2s;
+  }
+  .nav-cta:hover { transform: scale(1.03); opacity: 0.9; }
+
+  /* ---- PAGE HERO ---- */
+  .page-hero {
+    padding: 10rem 5% 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '';
+    position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+    width: 700px; height: 500px;
+    background: radial-gradient(ellipse, rgba(200,255,0,0.07) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero::after {
+    content: '';
+    position: absolute; bottom: 0; right: 0;
+    width: 300px; height: 300px;
+    background: radial-gradient(ellipse, rgba(124,58,237,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.25);
+    border-radius: 100px; padding: 0.35rem 1rem;
+    font-size: 0.8rem; color: var(--accent); margin-bottom: 1.5rem; font-weight: 500;
+    animation: fadeUp 0.5s ease both;
+  }
+  .hero-badge::before { content: '●'; font-size: 0.5rem; }
+  .page-hero h1 {
+    font-family: var(--font-head);
+    font-size: clamp(2.6rem, 6vw, 5rem);
+    font-weight: 800; line-height: 1.0; letter-spacing: -0.04em;
+    animation: fadeUp 0.5s 0.1s ease both;
+  }
+  .page-hero h1 em { font-style: normal; color: var(--accent); }
+  .page-hero p {
+    margin-top: 1.2rem; color: var(--muted); font-size: 1.05rem;
+    max-width: 480px; margin-left: auto; margin-right: auto;
+    font-weight: 300; animation: fadeUp 0.5s 0.2s ease both;
+  }
+
+  /* ---- QUICK CONTACT CARDS ---- */
+  .quick-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1rem;
+    padding: 0 5% 4rem;
+    animation: fadeUp 0.5s 0.3s ease both;
+  }
+  .qcard {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.8rem;
+    display: flex; align-items: flex-start; gap: 1rem;
+    transition: border-color 0.3s, transform 0.3s;
+    text-decoration: none;
+  }
+  .qcard:hover { border-color: rgba(200,255,0,0.25); transform: translateY(-3px); }
+  .qcard-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.2rem; flex-shrink: 0;
+  }
+  .qcard-icon.green { background: rgba(200,255,0,0.1); }
+  .qcard-icon.orange { background: rgba(255,107,53,0.12); }
+  .qcard-icon.purple { background: rgba(124,58,237,0.12); }
+  .qcard-icon.blue { background: rgba(56,189,248,0.1); }
+  .qcard-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.3rem; }
+  .qcard-value { font-size: 0.92rem; color: var(--text); font-weight: 500; }
+  .qcard-sub { font-size: 0.78rem; color: var(--muted); margin-top: 0.2rem; font-weight: 300; }
+
+  /* ---- MAIN CONTACT SECTION ---- */
+  .contact-main {
+    padding: 0 5% 6rem;
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  /* LEFT PANEL */
+  .contact-left { position: sticky; top: 100px; }
+  .section-label {
+    font-size: 0.78rem; text-transform: uppercase;
+    letter-spacing: 0.15em; color: var(--accent);
+    font-weight: 600; margin-bottom: 1rem;
+  }
+  .contact-left h2 {
+    font-family: var(--font-head);
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 800; letter-spacing: -0.03em; line-height: 1.1;
+    margin-bottom: 1.2rem;
+  }
+  .contact-left h2 em { font-style: normal; color: var(--accent); }
+  .contact-left p { color: var(--muted); font-weight: 300; line-height: 1.9; font-size: 0.92rem; margin-bottom: 2rem; }
+
+  .promise-list { display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2.5rem; }
+  .promise-item {
+    display: flex; align-items: flex-start; gap: 0.9rem;
+    padding: 1rem 1.2rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    transition: border-color 0.2s;
+  }
+  .promise-item:hover { border-color: rgba(200,255,0,0.15); }
+  .promise-icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+  .promise-text h5 { font-size: 0.9rem; font-weight: 500; margin-bottom: 0.2rem; }
+  .promise-text p { font-size: 0.8rem; color: var(--muted); font-weight: 300; margin: 0; line-height: 1.5; }
+
+  .availability-card {
+    background: linear-gradient(135deg, rgba(200,255,0,0.06), rgba(200,255,0,0.02));
+    border: 1px solid rgba(200,255,0,0.15);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+  .avail-header { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1rem; }
+  .avail-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent); animation: pulse 2s infinite; }
+  .avail-header span { font-size: 0.85rem; font-weight: 500; color: var(--accent); }
+  .avail-times { display: flex; flex-direction: column; gap: 0.5rem; }
+  .avail-row { display: flex; justify-content: space-between; font-size: 0.82rem; }
+  .avail-row span:first-child { color: var(--muted); }
+  .avail-row span:last-child { color: var(--text); font-weight: 500; }
+
+  /* RIGHT PANEL — FORM */
+  .form-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    padding: 3rem;
+  }
+  .form-title {
+    font-family: var(--font-head);
+    font-size: 1.3rem; font-weight: 800;
+    letter-spacing: -0.02em; margin-bottom: 0.4rem;
+  }
+  .form-sub { font-size: 0.85rem; color: var(--muted); font-weight: 300; margin-bottom: 2rem; }
+
+  .step-indicators {
+    display: flex; gap: 0.5rem; margin-bottom: 2.5rem;
+  }
+  .step-dot {
+    height: 3px; border-radius: 2px;
+    background: var(--border); flex: 1;
+    transition: background 0.3s;
+  }
+  .step-dot.active { background: var(--accent); }
+  .step-dot.done { background: rgba(200,255,0,0.4); }
+
+  .form-step { display: none; }
+  .form-step.active { display: block; animation: fadeUp 0.3s ease; }
+
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1rem; }
+  .form-group.full { grid-column: 1 / -1; }
+  .form-group label { font-size: 0.8rem; color: var(--muted); font-weight: 400; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.2s, background 0.2s;
+    -webkit-appearance: none;
+    width: 100%;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus {
+    border-color: rgba(200,255,0,0.4);
+    background: rgba(200,255,0,0.02);
+  }
+  .form-group select option { background: #1a1a24; }
+  .form-group textarea { resize: vertical; min-height: 120px; }
+
+  .service-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .service-option {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; gap: 0.6rem;
+    font-size: 0.85rem; color: var(--muted);
+    background: var(--bg3);
+    user-select: none;
+  }
+  .service-option:hover { border-color: rgba(200,255,0,0.2); color: var(--text); }
+  .service-option.selected {
+    border-color: rgba(200,255,0,0.5);
+    background: rgba(200,255,0,0.06);
+    color: var(--accent);
+  }
+  .service-option .so-icon { font-size: 1rem; }
+
+  .budget-options {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+  .budget-btn {
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    font-size: 0.82rem; color: var(--muted);
+    background: var(--bg3);
+    font-family: var(--font-body);
+  }
+  .budget-btn:hover { border-color: rgba(200,255,0,0.2); color: var(--text); }
+  .budget-btn.selected { border-color: rgba(200,255,0,0.5); background: rgba(200,255,0,0.06); color: var(--accent); }
+
+  .form-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-top: 1.5rem; gap: 1rem;
+  }
+  .btn-back {
+    background: transparent; border: 1px solid var(--border);
+    color: var(--muted); border-radius: 100px;
+    padding: 0.8rem 1.5rem; font-family: var(--font-body);
+    font-size: 0.88rem; cursor: pointer; transition: all 0.2s;
+  }
+  .btn-back:hover { border-color: rgba(255,255,255,0.2); color: var(--text); }
+  .btn-next {
+    background: var(--accent); color: #0a0a0f;
+    border: none; border-radius: 100px;
+    padding: 0.8rem 2rem; font-family: var(--font-body);
+    font-size: 0.9rem; font-weight: 600; cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s; flex: 1; max-width: 200px;
+  }
+  .btn-next:hover { transform: translateY(-2px); }
+  .btn-submit {
+    background: var(--accent); color: #0a0a0f;
+    border: none; border-radius: 100px;
+    padding: 1rem 2.5rem; font-family: var(--font-body);
+    font-size: 0.95rem; font-weight: 600; cursor: pointer;
+    transition: transform 0.2s, opacity 0.2s; width: 100%; margin-top: 1rem;
+  }
+  .btn-submit:hover { transform: translateY(-2px); opacity: 0.9; }
+
+  .step-label { font-size: 0.78rem; color: var(--muted); }
+
+  /* SUCCESS STATE */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 3rem 1rem;
+  }
+  .success-state.show { display: block; animation: fadeUp 0.4s ease; }
+  .success-icon {
+    width: 72px; height: 72px; border-radius: 50%;
+    background: rgba(200,255,0,0.1); border: 2px solid rgba(200,255,0,0.3);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 2rem; margin: 0 auto 1.5rem;
+    animation: popIn 0.4s ease;
+  }
+  .success-state h3 {
+    font-family: var(--font-head); font-size: 1.6rem;
+    font-weight: 800; letter-spacing: -0.02em; margin-bottom: 0.8rem;
+  }
+  .success-state p { color: var(--muted); font-weight: 300; font-size: 0.92rem; max-width: 320px; margin: 0 auto 2rem; line-height: 1.8; }
+  .success-chips { display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap; }
+  .schip {
+    background: rgba(200,255,0,0.08); border: 1px solid rgba(200,255,0,0.15);
+    border-radius: 100px; padding: 0.3rem 0.9rem;
+    font-size: 0.78rem; color: var(--accent);
+  }
+
+  /* ---- MAP / OFFICE SECTION ---- */
+  .office-section {
+    padding: 0 5% 6rem;
+  }
+  .office-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem; margin-top: 3rem;
+  }
+  .office-card {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 20px; overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .office-card:hover { border-color: rgba(200,255,0,0.15); transform: translateY(-3px); }
+  .office-map {
+    height: 160px;
+    background: var(--bg3);
+    position: relative; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .map-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      linear-gradient(rgba(200,255,0,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(200,255,0,0.04) 1px, transparent 1px);
+    background-size: 30px 30px;
+  }
+  .map-pin {
+    position: relative; z-index: 1;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: #0a0a0f;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.1rem;
+    box-shadow: 0 0 0 10px rgba(200,255,0,0.12), 0 0 0 20px rgba(200,255,0,0.05);
+  }
+  .office-body { padding: 1.5rem; }
+  .office-city {
+    font-family: var(--font-head); font-size: 1.1rem;
+    font-weight: 700; margin-bottom: 0.4rem; letter-spacing: -0.02em;
+  }
+  .office-address { font-size: 0.82rem; color: var(--muted); font-weight: 300; line-height: 1.6; margin-bottom: 1rem; }
+  .office-contact { font-size: 0.82rem; color: var(--text); }
+  .office-contact div { margin-bottom: 0.3rem; }
+  .office-contact span { color: var(--muted); }
+
+  /* ---- FAQ SECTION ---- */
+  .faq-section { background: var(--bg2); padding: 5rem 5%; }
+  .faq-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 1rem; margin-top: 3rem;
+  }
+  .faq-item {
+    background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 1.2rem 1.5rem;
+    display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; transition: background 0.2s;
+    font-size: 0.9rem; font-weight: 500;
+    gap: 1rem;
+  }
+  .faq-q:hover { background: rgba(255,255,255,0.02); }
+  .faq-icon {
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(200,255,0,0.1); border: 1px solid rgba(200,255,0,0.2);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--accent); font-size: 0.8rem; flex-shrink: 0;
+    transition: transform 0.3s, background 0.2s;
+  }
+  .faq-item.open .faq-icon { transform: rotate(45deg); background: var(--accent); color: #0a0a0f; }
+  .faq-a {
+    max-height: 0; overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.3s ease;
+    font-size: 0.85rem; color: var(--muted); font-weight: 300; line-height: 1.8;
+    padding: 0 1.5rem;
+  }
+  .faq-item.open .faq-a { max-height: 200px; padding: 0 1.5rem 1.2rem; }
+
+  /* ---- FOOTER ---- */
+  footer {
+    background: var(--bg2); border-top: 1px solid var(--border);
+    padding: 3rem 5%;
+    display: flex; justify-content: space-between; align-items: center;
+    flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-logo { font-family: var(--font-head); font-size: 1.2rem; font-weight: 800; }
+  .footer-logo span { color: var(--accent); }
+  footer p { color: var(--muted); font-size: 0.82rem; }
+  .footer-links { display: flex; gap: 1.5rem; }
+  .footer-links a { color: var(--muted); text-decoration: none; font-size: 0.82rem; transition: color 0.2s; }
+  .footer-links a:hover { color: var(--text); }
+
+  /* ---- ANIMATIONS ---- */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(0.85); }
+  }
+  @keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
+  }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 900px) {
+    .contact-main { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-left { position: static; }
+    .faq-grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .form-grid { grid-template-columns: 1fr; }
+    .service-grid { grid-template-columns: 1fr; }
+    .budget-options { grid-template-columns: 1fr 1fr; }
+    .quick-cards { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="logo">Growth<span>Lab</span></a>
+  <ul class="nav-links">
+    <li><a href="index.html#services">Services</a></li>
+    <li><a href="index.html#results">Results</a></li>
+    <li><a href="index.html#pricing">Pricing</a></li>
+    <li><a href="growthlab-casestudies.html">Case Studies</a></li>
+    <li><a href="growthlab-contact.html" class="active">Contact</a></li>
+  </ul>
+  <a href="#form" class="nav-cta">Get Started →</a>
+</nav>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="hero-badge">We respond within 48 hours</div>
+  <h1>Let's Build<br><em>Something Great</em></h1>
+  <p>Tell us about your brand and goals. We'll put together a custom growth strategy — no lock-in, no fluff.</p>
+</div>
+
+<!-- QUICK CONTACT CARDS -->
+<div class="quick-cards">
+  <a class="qcard" href="mailto:hello@growthlab.in">
+    <div class="qcard-icon green">📧</div>
+    <div>
+      <div class="qcard-label">Email Us</div>
+      <div class="qcard-value">work.ganeshmohapatra675@gmail.com</div>
+      <div class="qcard-sub">We reply within 24 hours</div>
+    </div>
+  </a>
+  <a class="qcard" href="tel:+919876543210">
+    <div class="qcard-icon orange">📞</div>
+    <div>
+      <div class="qcard-label">Call Us</div>
+      <div class="qcard-value">+91 78480 71250</div>
+      <div class="qcard-sub">Mon–Fri, 10am–7pm IST</div>
+    </div>
+  </a>
+  <a class="qcard" href="https://wa.me/917848071250" target="_blank">
+    <div class="qcard-icon purple">💬</div>
+    <div>
+      <div class="qcard-label">WhatsApp</div>
+      <div class="qcard-value">Chat with us</div>
+      <div class="qcard-sub">Fastest response channel</div>
+    </div>
+  </a>
+  <a class="qcard" href="#">
+    <div class="qcard-icon blue">📅</div>
+    <div>
+      <div class="qcard-label">Book a Call</div>
+      <div class="qcard-value">Free 30-min strategy</div>
+      <div class="qcard-sub">Pick a time that works</div>
+    </div>
+  </a>
+</div>
+
+<!-- MAIN CONTACT SECTION -->
+<div class="contact-main" id="form">
+
+  <!-- LEFT -->
+  <div class="contact-left">
+    <div class="section-label">Why Work With Us</div>
+    <h2>No fluff.<br><em>Just growth.</em></h2>
+    <p>We've helped 200+ brands scale profitably across Google, Meta, Shopify, and WooCommerce. Every client gets a dedicated team and transparent reporting — always.</p>
+
+    <div class="promise-list">
+      <div class="promise-item">
+        <div class="promise-icon">⚡</div>
+        <div class="promise-text">
+          <h5>Fast Onboarding</h5>
+          <p>Campaigns live within 7 days. No endless back-and-forth.</p>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-icon">📊</div>
+        <div class="promise-text">
+          <h5>Full Transparency</h5>
+          <p>Weekly reports with real numbers — no vanity metrics, no spin.</p>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-icon">🎯</div>
+        <div class="promise-text">
+          <h5>Dedicated Account Manager</h5>
+          <p>One point of contact who knows your business inside out.</p>
+        </div>
+      </div>
+      <div class="promise-item">
+        <div class="promise-icon">🔓</div>
+        <div class="promise-text">
+          <h5>No Lock-in Contracts</h5>
+          <p>Month-to-month. We earn your business every single month.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="availability-card">
+      <div class="avail-header">
+        <div class="avail-dot"></div>
+        <span>Currently Accepting New Clients</span>
+      </div>
+      <div class="avail-times">
+        <div class="avail-row"><span>Response Time</span><span>Within 48 hrs</span></div>
+        <div class="avail-row"><span>Onboarding</span><span>7 days</span></div>
+        <div class="avail-row"><span>Office Hours</span><span>Mon–Fri 10am–7pm</span></div>
+        <div class="avail-row"><span>Location</span><span>Chandigarh, India</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT — MULTI-STEP FORM -->
+  <div class="form-card">
+    <div id="formContent">
+      <div class="form-title">Start Your Growth Journey</div>
+      <div class="form-sub">Fill in the details below — takes less than 2 minutes.</div>
+
+      <!-- Step indicators -->
+      <div class="step-indicators">
+        <div class="step-dot active" id="dot1"></div>
+        <div class="step-dot" id="dot2"></div>
+        <div class="step-dot" id="dot3"></div>
+      </div>
+
+      <!-- STEP 1: Personal Info -->
+      <div class="form-step active" id="step1">
+        <div class="form-grid">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" id="fname" placeholder="Rahul">
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" id="lname" placeholder="Sharma">
+          </div>
+          <div class="form-group">
+            <label>Email Address *</label>
+            <input type="email" id="email" placeholder="rahul@yourbrand.com">
+          </div>
+          <div class="form-group">
+            <label>Phone Number *</label>
+            <input type="tel" id="phone" placeholder="+91 98765 43210">
+          </div>
+          <div class="form-group full">
+            <label>Company / Brand Name *</label>
+            <input type="text" id="company" placeholder="Your Brand Name">
+          </div>
+          <div class="form-group full">
+            <label>Website URL (if any)</label>
+            <input type="url" id="website" placeholder="https://yourbrand.com">
+          </div>
+        </div>
+        <div class="form-nav">
+          <span class="step-label">Step 1 of 3 — Your Details</span>
+          <button class="btn-next" onclick="nextStep(2)">Next →</button>
+        </div>
+      </div>
+
+      <!-- STEP 2: Services & Budget -->
+      <div class="form-step" id="step2">
+        <div class="form-group">
+          <label>Which services are you interested in? (select all that apply)</label>
+          <div class="service-grid">
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">🎯</span> Google Ads</div>
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">📱</span> Meta Ads</div>
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">🛍️</span> Shopify</div>
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">🔧</span> WooCommerce</div>
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">🚀</span> Landing Pages</div>
+            <div class="service-option" onclick="toggleService(this)"><span class="so-icon">📢</span> Brand Promotion</div>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Monthly Ad Budget</label>
+          <div class="budget-options">
+            <button class="budget-btn" onclick="selectBudget(this)">Under ₹50K</button>
+            <button class="budget-btn" onclick="selectBudget(this)">₹50K – ₹2L</button>
+            <button class="budget-btn" onclick="selectBudget(this)">₹2L – ₹5L</button>
+            <button class="budget-btn" onclick="selectBudget(this)">₹5L+</button>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Industry / Niche</label>
+          <select id="industry">
+            <option value="" disabled selected>Select your industry</option>
+            <option>E-commerce / D2C</option>
+            <option>Fashion & Apparel</option>
+            <option>Health & Wellness</option>
+            <option>Education / EdTech</option>
+            <option>Food & Beverage</option>
+            <option>Real Estate</option>
+            <option>Finance / FinTech</option>
+            <option>SaaS / Technology</option>
+            <option>Beauty & Skincare</option>
+            <option>Travel & Hospitality</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-nav">
+          <button class="btn-back" onclick="nextStep(1)">← Back</button>
+          <span class="step-label">Step 2 of 3</span>
+          <button class="btn-next" onclick="nextStep(3)">Next →</button>
+        </div>
+      </div>
+
+      <!-- STEP 3: Message -->
+      <div class="form-step" id="step3">
+        <div class="form-group">
+          <label>What's your biggest marketing challenge right now? *</label>
+          <textarea id="challenge" placeholder="E.g. High cost per lead, can't scale our ad spend profitably, just launched and need to acquire first customers..."></textarea>
+        </div>
+        <div class="form-group">
+          <label>What does success look like in 6 months?</label>
+          <textarea id="goal" placeholder="E.g. ₹50L monthly revenue, 500 leads per month at under ₹500 CPL..." style="min-height: 90px;"></textarea>
+        </div>
+        <div class="form-group">
+          <label>How did you hear about us?</label>
+          <select id="source">
+            <option value="" disabled selected>Select an option</option>
+            <option>Google Search</option>
+            <option>Instagram / Facebook</option>
+            <option>LinkedIn</option>
+            <option>Referral from a friend</option>
+            <option>Existing client referral</option>
+            <option>Other</option>
+          </select>
+        </div>
+        <div class="form-nav">
+          <button class="btn-back" onclick="nextStep(2)">← Back</button>
+          <span class="step-label">Step 3 of 3</span>
+        </div>
+        <button class="btn-submit" onclick="submitForm(this)">Send My Request →</button>
+      </div>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-state" id="successState">
+      <div class="success-icon">✓</div>
+      <h3>Request Received!</h3>
+      <p>Thanks for reaching out. Our team will review your details and get back to you within 48 hours with a custom growth plan.</p>
+      <div class="success-chips">
+        <span class="schip">✓ Email confirmation sent</span>
+        <span class="schip">✓ Team notified</span>
+        <span class="schip">✓ Response in 48hrs</span>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- OFFICE SECTION -->
+<div class="office-section">
+  <div class="section-label">Our Offices</div>
+  <h2 style="font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em;">Where we <em style="font-style:normal;color:var(--accent)">operate</em></h2>
+  <div class="office-grid">
+    <div class="office-card">
+      <div class="office-map">
+        <div class="map-pattern"></div>
+        <div class="map-pin">📍</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">Chandigarh HQ</div>
+        <div class="office-address">SCO 45, Sector 17-C<br>Chandigarh — 160017</div>
+        <div class="office-contact">
+          <div><span>Phone: </span>+91 98765 43210</div>
+          <div><span>Email: </span>chandigarh@growthlab.in</div>
+        </div>
+      </div>
+    </div>
+    <div class="office-card">
+      <div class="office-map">
+        <div class="map-pattern"></div>
+        <div class="map-pin">📍</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">Delhi NCR</div>
+        <div class="office-address">Tower B, Cyber Hub<br>Gurugram — 122002</div>
+        <div class="office-contact">
+          <div><span>Phone: </span>+91 98765 43211</div>
+          <div><span>Email: </span>delhi@growthlab.in</div>
+        </div>
+      </div>
+    </div>
+    <div class="office-card">
+      <div class="office-map">
+        <div class="map-pattern"></div>
+        <div class="map-pin">📍</div>
+      </div>
+      <div class="office-body">
+        <div class="office-city">Mumbai</div>
+        <div class="office-address">WeWork BKC, G Block<br>Mumbai — 400051</div>
+        <div class="office-contact">
+          <div><span>Phone: </span>+91 98765 43212</div>
+          <div><span>Email: </span>mumbai@growthlab.in</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FAQ SECTION -->
+<div class="faq-section">
+  <div class="section-label">Quick Answers</div>
+  <h2 style="font-family: var(--font-head); font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; letter-spacing: -0.03em;">Frequently Asked <em style="font-style:normal;color:var(--accent)">Questions</em></h2>
+  <div class="faq-grid">
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How quickly can you get started?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">We typically onboard new clients within 3–5 business days. Campaigns go live within 7 days of signing. We move fast because your growth shouldn't wait.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do you require long-term contracts?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">No lock-in contracts — ever. We work month-to-month and earn your business every month. Most clients stay for 12+ months because we deliver results.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What is the minimum budget to start?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">We work with brands spending as little as ₹30,000/month on ads. Our Starter package is designed for brands just beginning their paid media journey.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        How do you report results?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">You get a dedicated dashboard with live data, plus a weekly summary report every Monday morning. No waiting — you always know exactly where your money is going.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Do you work with international brands?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">Yes! While we're headquartered in India, we manage campaigns for brands in the US, UK, UAE, Australia, and Southeast Asia. Time zones are never an issue.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        What industries do you specialize in?
+        <div class="faq-icon">+</div>
+      </div>
+      <div class="faq-a">We have deep expertise in e-commerce/D2C, EdTech, health & wellness, fashion, and SaaS. We've successfully worked across 15+ industries — so most niches are familiar territory.</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="footer-logo">Growth<span>Lab</span></div>
+    <p style="margin-top: 0.4rem;">Performance Marketing for ambitious brands.</p>
+  </div>
+  <div class="footer-links">
+    <a href="index.html#services">Services</a>
+    <a href="index.html#pricing">Pricing</a>
+    <a href="growthlab-casestudies.html">Case Studies</a>
+    <a href="growthlab-contact.html">Contact</a>
+  </div>
+  <p>© 2025 GrowthLab. All rights reserved.</p>
+</footer>
+
+<script>
+let currentStep = 1;
+
+function nextStep(step) {
+  if (step > currentStep) {
+    const stepEl = document.getElementById('step' + currentStep);
+    const inputs = stepEl.querySelectorAll('input[required], textarea[required]');
+    // Basic validation skipped for demo — just advance
+  }
+  document.getElementById('step' + currentStep).classList.remove('active');
+  document.getElementById('dot' + currentStep).classList.remove('active');
+  document.getElementById('dot' + currentStep).classList.add('done');
+
+  currentStep = step;
+  document.getElementById('step' + currentStep).classList.add('active');
+  document.getElementById('dot' + currentStep).classList.remove('done');
+  document.getElementById('dot' + currentStep).classList.add('active');
+}
+
+function toggleService(el) {
+  el.classList.toggle('selected');
+}
+
+function selectBudget(el) {
+  document.querySelectorAll('.budget-btn').forEach(b => b.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function submitForm(btn) {
+  btn.textContent = 'Sending...';
+  btn.disabled = true;
+  setTimeout(() => {
+    document.getElementById('formContent').style.display = 'none';
+    document.getElementById('successState').classList.add('show');
+  }, 1400);
+}
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(f => f.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+// Scroll reveal for office cards
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.style.opacity = '1';
+      e.target.style.transform = 'translateY(0)';
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.office-card, .faq-item').forEach(el => {
+  el.style.opacity = '0';
+  el.style.transform = 'translateY(16px)';
+  el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+  observer.observe(el);
+});
+</script>
+</body>
+</html>
