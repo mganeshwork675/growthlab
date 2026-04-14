@@ -909,34 +909,49 @@
             <label>Phone Number</label>
             <input type="tel" name="tel" placeholder="+91 98765 43210">
           </div>
-          <div class="form-group">
-            <label>Service Interested In</label>
-            <select>
-              <option value="" disabled selected>Select a service</option>
-              <option>Brand Promotion</option>
-              <option>Google Ads Management</option>
-              <option>Meta Ads Management</option>
-              <option>Landing Page Design</option>
-              <option>Shopify Management</option>
-              <option>WooCommerce Management</option>
-              <option>Full Growth Package</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Monthly Ad Budget (approx.)</label>
-            <select>
-              <option value="" disabled selected>Select budget range</option>
-              <option>Under ₹50,000</option>
-              <option>₹50,000 – ₹2,00,000</option>
-              <option>₹2,00,000 – ₹5,00,000</option>
-              <option>₹5,00,000+</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Tell us about your brand</label>
-            <textarea placeholder="What do you sell, who's your audience, and what's your main challenge right now?"></textarea>
-          </div>
-        <button class="submit-btn" onclick="handleSubmit(this)">Send Request →</button>
+  <div class="form-group">
+    <label>Service Interested In</label>
+    <select name="service" required>
+      <option value="" disabled selected>Select a service</option>
+      <option>Brand Promotion</option>
+      <option>Google Ads Management</option>
+      <option>Meta Ads Management</option>
+      <option>Landing Page Design</option>
+      <option>Shopify Management</option>
+      <option>WooCommerce Management</option>
+      <option>Full Growth Package</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Monthly Ad Budget (approx.)</label>
+    <select name="budget" required>
+      <option value="" disabled selected>Select budget range</option>
+      <option>Under ₹50,000</option>
+      <option>₹50,000 – ₹2,00,000</option>
+      <option>₹2,00,000 – ₹5,00,000</option>
+      <option>₹5,00,000+</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label>Tell us about your brand</label>
+    <textarea 
+      name="message" 
+      placeholder="What do you sell, who's your audience, and what's your main challenge right now?" 
+      required>
+    </textarea>
+  </div>
+
+  <!-- Optional hidden fields -->
+  <input type="hidden" name="_subject" value="New GrowthLab Lead">
+  <input type="hidden" name="_captcha" value="false">
+
+  <button type="submit" class="submit-btn">
+    Send Request →
+  </button>
+
+</form>
         </div>
       </div>
     </div>
